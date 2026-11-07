@@ -1,257 +1,1055 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Kuromi · Colección privada</title>
+<title>@void // Colección Privada</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
 <style>
   :root {
-    --nyctophobia: #0C1118;
-    --shadows: #49111C;
-    --salmon: #FB8076;
-    --aphrodisiac: #EA5562;
-    --christmas: #B01630;
-    --text: #FB8076;
-    --text-soft: rgba(251, 128, 118, 0.75);
-    --card: rgba(73, 17, 28, 0.35);
-    --border: rgba(234, 85, 98, 0.25);
+    --bg-dark: #07090D;
+    --blood-red: #D90429;
+    --neon-purple: #8B00FF;
+    --latex-sheen: #141821;
+    --border-glow: rgba(217, 4, 41, 0.35);
+    --text-main: #F5F5F7;
+    --text-muted: rgba(245, 245, 247, 0.65);
   }
+
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
+
   body {
-    font-family: 'Montserrat', system-ui, sans-serif;
-    background: var(--nyctophobia);
-    color: var(--text);
+    font-family: 'Montserrat', system-ui, -apple-system, sans-serif;
+    background: var(--bg-dark);
+    color: var(--text-main);
     min-height: 100vh;
-    padding-top: env(safe-area-inset-top, 0px);
-    padding-bottom: env(safe-area-inset-bottom, 0px);
+    padding: env(safe-area-inset-top, 0px) 0 env(safe-area-inset-bottom, 0px);
     overflow-x: hidden;
   }
+
+  /* Canvas background */
+  #bg-canvas {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+  }
+
   body::before {
     content: "";
     position: fixed; inset: 0;
     background:
-      radial-gradient(ellipse at 50% 0%, rgba(176, 22, 48, 0.35), transparent 60%),
-      radial-gradient(ellipse at 100% 100%, rgba(73, 17, 28, 0.6), transparent 55%);
+      radial-gradient(circle at 50% -10%, rgba(139, 0, 255, 0.28), transparent 60%),
+      radial-gradient(circle at 100% 100%, rgba(217, 4, 41, 0.2), transparent 50%),
+      radial-gradient(circle at 0% 80%, rgba(139, 0, 255, 0.15), transparent 50%);
     pointer-events: none;
-    z-index: 0;
+    z-index: 1;
   }
-  main { position: relative; z-index: 1; max-width: 560px; margin: 0 auto; padding: 24px 20px 64px; }
 
-  .hero { text-align: center; padding: 36px 0 28px; }
+  main { position: relative; z-index: 2; max-width: 480px; margin: 0 auto; padding: 24px 16px 64px; }
+
+  /* Hero Elements */
   .tag {
-    display: inline-block;
-    font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
-    color: var(--aphrodisiac);
-    border: 1px solid var(--border);
-    padding: 6px 14px; border-radius: 999px;
-    margin-bottom: 22px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 10px; letter-spacing: 4px; text-transform: uppercase;
+    color: var(--blood-red);
+    border: 1px solid var(--border-glow);
+    padding: 6px 16px; border-radius: 999px;
+    margin-bottom: 18px;
+    background: rgba(217, 4, 41, 0.08);
+    box-shadow: 0 0 15px rgba(217, 4, 41, 0.2);
   }
+
   .hero h1 {
-    font-size: clamp(38px, 11vw, 56px);
-    font-weight: 800; line-height: 1.02;
-    letter-spacing: -1px;
-    color: var(--salmon);
+    font-size: clamp(38px, 11vw, 54px);
+    font-weight: 900; line-height: 0.98;
+    letter-spacing: -1.5px;
+    text-transform: uppercase;
   }
-  .hero h1 span { color: var(--aphrodisiac); }
+  .hero h1 span.purple { color: var(--neon-purple); text-shadow: 0 0 25px rgba(139,0,255,0.6); }
+  .hero h1 span.blood { color: var(--blood-red); text-shadow: 0 0 25px rgba(217,4,41,0.6); }
+
   .hero p {
-    margin-top: 16px;
-    font-size: 15px; line-height: 1.6;
-    color: var(--text-soft);
+    margin-top: 14px;
+    font-size: 14px; line-height: 1.5;
+    color: var(--text-muted);
+    font-weight: 600;
+  }
+
+  .hero-banner-wrap {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    margin-top: 22px;
+    border: 1px solid var(--border-glow);
+    box-shadow: 0 12px 35px rgba(0,0,0,0.85), 0 0 20px rgba(139,0,255,0.25);
+  }
+
+  .hero-banner-wrap img {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    display: block;
+    filter: brightness(0.92) contrast(1.08);
   }
 
   .section-title {
     text-align: center;
-    font-size: 12px; letter-spacing: 3px; text-transform: uppercase;
-    color: var(--aphrodisiac);
-    margin: 56px 0 22px;
+    font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--blood-red);
+    margin: 48px 0 18px;
+    font-weight: 900;
+    display: flex; align-items: center; justify-content: center; gap: 12px;
   }
+  .section-title::before, .section-title::after {
+    content: ""; height: 1px; width: 28px;
+    background: linear-gradient(90deg, transparent, var(--border-glow));
+  }
+  .section-title::after { background: linear-gradient(270deg, transparent, var(--border-glow)); }
 
+  /* Gallery Grid */
   .gallery {
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
   }
-  .gallery div {
+  .gallery-item {
+    position: relative;
     aspect-ratio: 3 / 4;
     border-radius: 12px;
-    background: linear-gradient(180deg, var(--shadows), var(--nyctophobia));
-    border: 1px solid var(--border);
+    background: var(--latex-sheen);
+    border: 1px solid var(--border-glow);
     overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
   }
-  .gallery img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .gallery-item:hover {
+    transform: translateY(-3px);
+    border-color: var(--neon-purple);
+    box-shadow: 0 8px 20px rgba(139, 0, 255, 0.4);
+  }
+  .gallery-item img {
+    width: 100%; height: 100%; object-fit: cover; display: block; filter: brightness(0.9);
+  }
+  .gallery-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(0deg, rgba(7,9,13,0.85) 0%, transparent 60%);
+    display: flex; align-items: flex-end; justify-content: center;
+    padding: 8px;
+  }
 
+  /* Currency Switcher */
+  .currency-switch {
+    display: flex; justify-content: center; gap: 6px;
+    margin: 20px 0 24px;
+  }
+  .currency-btn {
+    background: rgba(20, 24, 33, 0.6);
+    border: 1px solid var(--border-glow);
+    color: var(--text-muted);
+    font-size: 11px; font-weight: 800; letter-spacing: 1px;
+    padding: 6px 14px; border-radius: 999px;
+    cursor: pointer; transition: all 0.2s ease;
+  }
+  .currency-btn.active {
+    background: var(--blood-red);
+    color: #fff;
+    border-color: var(--blood-red);
+    box-shadow: 0 0 12px rgba(217, 4, 41, 0.5);
+  }
+
+  /* Offers Section */
   .offers { display: grid; gap: 16px; }
   .offer {
-    background: var(--card);
-    border: 1px solid var(--border);
+    background: rgba(20, 24, 33, 0.75);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--border-glow);
     border-radius: 20px;
-    padding: 26px 22px;
+    padding: 24px 20px;
     position: relative;
+    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+  }
+  .offer:hover {
+    border-color: rgba(139, 0, 255, 0.5);
+    box-shadow: 0 8px 28px rgba(139, 0, 255, 0.25);
   }
   .offer.featured {
-    background: linear-gradient(170deg, rgba(176,22,48,0.55), rgba(73,17,28,0.7));
-    border-color: rgba(251,128,118,0.45);
+    background: linear-gradient(160deg, rgba(139,0,255,0.22), rgba(20,24,33,0.9));
+    border: 1.5px solid var(--neon-purple);
+    box-shadow: 0 0 30px rgba(139,0,255,0.35);
   }
   .badge {
     position: absolute; top: -11px; right: 18px;
-    background: var(--salmon); color: var(--nyctophobia);
-    font-size: 10px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase;
-    padding: 5px 11px; border-radius: 999px;
+    background: var(--blood-red); color: #fff;
+    font-size: 9px; font-weight: 900; letter-spacing: 2px; text-transform: uppercase;
+    padding: 4px 12px; border-radius: 999px;
+    box-shadow: 0 0 12px rgba(217,4,41,0.6);
   }
-  .offer h3 { font-size: 20px; font-weight: 700; color: var(--salmon); }
-  .offer .sub { font-size: 13px; color: var(--text-soft); margin-top: 6px; line-height: 1.5; }
+  .offer h3 { font-size: 20px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; }
+  .offer .sub { font-size: 13px; color: var(--text-muted); margin-top: 5px; line-height: 1.45; font-weight: 500; }
   .price {
-    font-size: 40px; font-weight: 800; color: #fff; margin: 18px 0 4px;
-    letter-spacing: -1px;
+    font-size: 38px; font-weight: 900; color: #fff; margin: 16px 0 4px;
+    letter-spacing: -1.5px; display: flex; align-items: baseline; gap: 6px;
   }
-  .price small { font-size: 14px; font-weight: 600; color: var(--text-soft); letter-spacing: 0; }
+  .price small { font-size: 13px; font-weight: 700; color: var(--neon-purple); letter-spacing: 0; }
   .offer ul { list-style: none; margin: 16px 0 22px; display: grid; gap: 9px; }
   .offer li {
-    font-size: 14px; line-height: 1.45; color: var(--text);
-    padding-left: 22px; position: relative;
+    font-size: 13px; line-height: 1.4; color: var(--text-main); font-weight: 600;
+    padding-left: 20px; position: relative;
   }
   .offer li::before {
-    content: ""; position: absolute; left: 0; top: 7px;
-    width: 8px; height: 8px; border-radius: 50%;
-    background: var(--aphrodisiac);
+    content: "🩸"; position: absolute; left: 0; top: 0px; font-size: 11px;
   }
+
+  /* Buttons */
   .btn {
     display: flex; align-items: center; justify-content: center; text-align: center;
     text-decoration: none;
-    font-family: inherit; font-weight: 800; font-size: 14px;
-    letter-spacing: 1.5px; text-transform: uppercase;
+    font-family: inherit; font-weight: 900; font-size: 13px;
+    letter-spacing: 2px; text-transform: uppercase;
     padding: 16px; border-radius: 14px;
-    background: var(--christmas); color: #fff;
-    transition: transform .2s ease, background .2s ease;
+    background: var(--blood-red); color: #fff;
+    box-shadow: 0 4px 20px rgba(217,4,41,0.4);
+    transition: transform .25s ease, filter .25s ease, box-shadow .25s ease;
+    cursor: pointer; border: none;
   }
-  .btn:hover { background: var(--aphrodisiac); transform: translateY(-2px); }
+  .btn:hover { filter: brightness(1.15); transform: translateY(-2px); box-shadow: 0 8px 25px rgba(217,4,41,0.6); }
+  .btn-purple {
+    background: linear-gradient(135deg, var(--neon-purple), #5B00B2);
+    box-shadow: 0 4px 20px rgba(139,0,255,0.4);
+  }
+  .btn-purple:hover { box-shadow: 0 8px 30px rgba(139,0,255,0.7); }
   .btn.ghost {
-    background: transparent; color: var(--salmon);
-    border: 1px solid rgba(251,128,118,0.5);
+    background: rgba(255,255,255,0.04); color: var(--text-main);
+    border: 1px solid rgba(245,245,247,0.2);
+    box-shadow: none;
   }
-  .btn.ghost:hover { background: var(--shadows); }
+  .btn.ghost:hover { background: rgba(255,255,255,0.08); border-color: var(--neon-purple); }
   .pay-note {
     display: block; text-align: center; margin-top: 10px;
-    font-size: 11px; color: var(--text-soft); letter-spacing: .5px;
+    font-size: 10px; color: var(--text-muted); letter-spacing: .5px; text-transform: uppercase; font-weight: 700;
   }
 
-  .steps { display: grid; gap: 12px; }
+  /* Steps */
+  .steps { display: grid; gap: 10px; }
   .step {
-    display: flex; gap: 16px; align-items: flex-start;
+    display: flex; gap: 14px; align-items: center;
     padding: 16px 18px; border-radius: 16px;
-    background: var(--card); border: 1px solid var(--border);
+    background: rgba(20, 24, 33, 0.55); border: 1px solid var(--border-glow);
   }
-  .step b { font-size: 18px; color: var(--aphrodisiac); min-width: 26px; }
-  .step p { font-size: 14px; line-height: 1.5; color: var(--text); }
+  .step b { font-size: 18px; color: var(--blood-red); min-width: 26px; font-weight: 900; }
+  .step p { font-size: 13px; line-height: 1.4; color: var(--text-main); font-weight: 600; }
 
-  details { border-bottom: 1px solid var(--border); padding: 16px 4px; }
+  /* Accordion FAQ */
+  details {
+    background: rgba(20, 24, 33, 0.55);
+    border-radius: 14px;
+    border: 1px solid var(--border-glow);
+    margin-bottom: 10px;
+    padding: 15px 18px;
+    transition: border-color 0.2s ease;
+  }
+  details[open] { border-color: var(--neon-purple); }
   summary {
-    cursor: pointer; font-weight: 600; font-size: 15px; color: var(--salmon);
-    list-style: none;
+    cursor: pointer; font-weight: 700; font-size: 14px; color: var(--text-main);
+    list-style: none; display: flex; justify-content: space-between; align-items: center;
   }
   summary::-webkit-details-marker { display: none; }
-  summary::after { content: " +"; color: var(--aphrodisiac); }
-  details[open] summary::after { content: " −"; }
-  details p { margin-top: 10px; font-size: 14px; line-height: 1.6; color: var(--text-soft); }
+  summary::after { content: "+"; color: var(--blood-red); font-size: 18px; font-weight: 900; }
+  details[open] summary::after { content: "−"; color: var(--neon-purple); }
+  details p { margin-top: 10px; font-size: 13px; line-height: 1.5; color: var(--text-muted); font-weight: 500; }
+
+  /* Modal Preview */
+  .modal-backdrop {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(8px);
+    z-index: 100; display: flex; align-items: center; justify-content: center; padding: 20px;
+    opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
+  }
+  .modal-backdrop.open { opacity: 1; pointer-events: auto; }
+  .modal-content {
+    position: relative; max-width: 380px; width: 100%; background: #0F121A;
+    border: 1px solid var(--border-glow); border-radius: 20px; overflow: hidden;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.9);
+  }
+  .modal-close {
+    position: absolute; top: 12px; right: 12px; z-index: 10;
+    width: 32px; height: 32px; border-radius: 50%; background: rgba(0,0,0,0.6);
+    color: #fff; display: flex; align-items: center; justify-content: center;
+    font-size: 18px; font-weight: 900; cursor: pointer; border: 1px solid rgba(255,255,255,0.2);
+  }
 
   footer {
-    text-align: center; margin-top: 56px;
-    font-size: 12px; color: var(--text-soft); letter-spacing: 1px;
+    text-align: center; margin-top: 52px;
+    font-size: 11px; color: var(--text-muted); letter-spacing: 1px;
   }
-  footer .mark { font-size: 22px; margin-bottom: 8px; color: var(--aphrodisiac); }
-  .disclaimer { margin-top: 14px; font-size: 11px; line-height: 1.5; opacity: .7; }
+  footer .mark { font-size: 22px; margin-bottom: 6px; color: var(--blood-red); text-shadow: 0 0 10px var(--blood-red); }
+  .disclaimer { margin-top: 10px; font-size: 10px; line-height: 1.4; opacity: .5; text-transform: uppercase; }
 </style>
 </head>
 <body>
+
+<canvas id="bg-canvas"></canvas>
+
 <main>
 
-  <section class="hero">
-    <span class="tag">Colección privada</span>
-    <h1>Kuromi<br><span>after dark</span></h1>
-    <p>Fotos suaves, miradas que se quedan. Elegí cómo llevarte un pedacito de mi mundo.</p>
-    <img src="banner.jpg" alt="Kuromi" style="width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:22px;margin-top:28px;border:1px solid var(--border);">
+  <section class="hero text-center">
+    <span class="tag">⛓️ · Explicito & Exclusivo 🩸</span>
+    <h1>Void<br><span class="blood">Fem</span></h1>
+    <p>Látex negro, tinta hexagonal y cero vueltas. Elegí cómo querés entrar a mi privado.</p>
+    
+    <div class="hero-banner-wrap">
+      <img src="banner.jpg" alt="@void" onerror="this.src='https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=800&q=80'">
+    </div>
   </section>
 
-  <h2 class="section-title">Vistazo</h2>
+  <!-- Stock Urgency Bar -->
+  <div class="mt-6 p-3 rounded-xl bg-red-950/40 border border-red-500/30 flex items-center justify-between text-xs">
+    <span class="flex items-center gap-2 text-red-400 font-bold">
+      <span class="w-2 h-2 rounded-full bg-red-500 animate-ping"></span>
+      CUPOS VACANTES LIMITADOS
+    </span>
+    <span class="font-extrabold text-white bg-red-600/40 px-2 py-0.5 rounded border border-red-500/40" id="slots-count">3 libres</span>
+  </div>
+
+  <h2 class="section-title">Vistazo de la colección</h2>
   <section class="gallery">
-    <div><img src="foto1.jpg" alt="Vista previa 1"></div>
-    <div><img src="foto2.jpg" alt="Vista previa 2"></div>
-    <div><img src="foto3.jpg" alt="Vista previa 3"></div>
+    <div class="gallery-item" onclick="openPreview('foto1.jpg', '#01 FLASH')">
+      <img src="foto1.jpg" alt="Preview 1" onerror="this.src='https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=400&q=80'">
+      <div class="gallery-overlay"><span class="text-[9px] font-black tracking-widest text-white uppercase">🔍 VER TEASER</span></div>
+    </div>
+    <div class="gallery-item" onclick="openPreview('foto2.jpg', '#02 LATEX')">
+      <img src="foto2.jpg" alt="Preview 2" onerror="this.src='https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=400&q=80'">
+      <div class="gallery-overlay"><span class="text-[9px] font-black tracking-widest text-white uppercase">🔍 VER TEASER</span></div>
+    </div>
+    <div class="gallery-item" onclick="openPreview('foto3.jpg', '#03 INTIMATE')">
+      <img src="foto3.jpg" alt="Preview 3" onerror="this.src='https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&w=400&q=80'">
+      <div class="gallery-overlay"><span class="text-[9px] font-black tracking-widest text-white uppercase">🔍 VER TEASER</span></div>
+    </div>
   </section>
 
-  <h2 class="section-title">Elegí tu opción</h2>
+  <h2 class="section-title">Menú de Accesos</h2>
+
+  <!-- Selector de moneda -->
+  <div class="currency-switch">
+    <button class="currency-btn active" id="btn-ars" onclick="setCurrency('ARS')">ARS ($)</button>
+    <button class="currency-btn" id="btn-usd" onclick="setCurrency('USD')">USD ($)</button>
+  </div>
+
   <section class="offers">
 
     <article class="offer">
-      <h3>Foto random</h3>
-      <p class="sub">Una imagen sorpresa de la colección. Ideal para probar.</p>
-      <div class="price">$2.000 <small>ARS</small></div>
+      <h3>Foto Random</h3>
+      <p class="sub">Una imagen sorpresa para probar si te da el cuero.</p>
+      <div class="price" id="price-1">$2.000 <small id="curr-1">ARS</small></div>
       <ul>
         <li>1 foto en alta resolución</li>
-        <li>Entrega por email tras confirmar el pago</li>
-        <li>Formato vertical 9:16</li>
+        <li>Entrega inmediata por email</li>
+        <li>Formato vertical sin censura</li>
       </ul>
-      <!-- PEGAR AQUÍ el link de pago de Mercado Pago para la foto random -->
-      <a class="btn ghost" href="https://mpago.la/2E2SJbt" target="_blank" rel="noopener">Comprar foto random</a>
-      <span class="pay-note">Pago seguro con Mercado Pago</span>
+      <a class="btn ghost" href="https://mpago.la/2E2SJbt" target="_blank" rel="noopener">Comprar al toque</a>
+      <span class="pay-note">Mercado Pago / Pago Seguro 💳</span>
     </article>
 
     <article class="offer featured">
-      <span class="badge">Más elegido</span>
-      <h3>Pack de 10 fotos</h3>
-      <p class="sub">Diez imágenes de la colección, sin repetir. Te sale la mitad que comprarlas sueltas.</p>
-      <div class="price">$10.000 <small>ARS</small></div>
+      <span class="badge">MÁS PEDIDO 🩸</span>
+      <h3>Pack de 10 Fotos</h3>
+      <p class="sub">Diez imágenes directas al hueso. Látex negro, tinta y mirada pesada.</p>
+      <div class="price" id="price-2">$10.000 <small id="curr-2">ARS</small></div>
       <ul>
-        <li>10 fotos en alta resolución</li>
-        <li>Entrega por email tras confirmar el pago</li>
-        <li>Formato vertical 9:16</li>
+        <li>10 fotos HD exclusivas sin repetir</li>
+        <li>Poses de espalda y cuerpo completo</li>
+        <li>Entrega directa a tu casilla de correo</li>
       </ul>
-      <!-- PEGAR AQUÍ el link de pago de Mercado Pago para el pack -->
-      <a class="btn" href="https://mpago.la/1ELyceL" target="_blank" rel="noopener">Comprar pack de 10</a>
-      <span class="pay-note">Pago seguro con Mercado Pago</span>
+      <a class="btn btn-purple" href="https://mpago.la/1ELyceL" target="_blank" rel="noopener">Activar pack full 🔞</a>
+      <span class="pay-note">Mercado Pago / Pago Seguro 💳</span>
     </article>
 
   </section>
 
-  <h2 class="section-title">Cómo funciona</h2>
+  <h2 class="section-title">Cómo se maneja</h2>
   <section class="steps">
-    <div class="step"><b>01</b><p>Elegís tu opción y pagás con Mercado Pago.</p></div>
-    <div class="step"><b>02</b><p>Te escribo al mail de tu pago y te envío las fotos.</p></div>
-    <div class="step"><b>03</b><p>Si querés más, la colección se renueva cada tanto.</p></div>
+    <div class="step"><b>01</b><p>Elegís tu opción y pagás al toque con Mercado Pago.</p></div>
+    <div class="step"><b>02</b><p>Te cae el contenido directo a tu correo electrónico.</p></div>
+    <div class="step"><b>03</b><p>Disfrutás en privado. No hay devoluciones.</p></div>
   </section>
 
-  <h2 class="section-title">Preguntas</h2>
+  <h2 class="section-title">Dudas</h2>
   <section>
     <details>
       <summary>¿Qué incluye cada compra?</summary>
-      <p>Fotos en alta resolución, digitales. No hay envío físico.</p>
+      <p>Material digital en alta resolución. Cero envíos físicos, todo virtual e inmediato.</p>
     </details>
     <details>
-      <summary>¿Cuánto tarda la entrega?</summary>
-      <p>Apenas se acredita el pago, te envío las fotos al mail con el que pagaste.</p>
+      <summary>¿Cuánto demora en llegar?</summary>
+      <p>Apenas se acredita el pago, te lo mando al mail usado en Mercado Pago. Cero vueltas.</p>
     </details>
     <details>
-      <summary>¿Puedo pasar de la foto random al pack?</summary>
-      <p>Sí. Escribime con el comprobante y te descuento lo pagado por la foto random.</p>
+      <summary>¿La máscara de látex se saca?</summary>
+      <p>La máscara de orejas rectas no se saca jamás. Es la marca de la casa. Todo lo demás queda expuesto.</p>
     </details>
     <details>
-      <summary>¿Hay devoluciones?</summary>
-      <p>Por ser contenido digital, no hay devoluciones una vez entregado. Si el archivo llega con algún problema, lo resolvemos.</p>
+      <summary>¿Hay reembolsos?</summary>
+      <p>Ni lo pienses. Contenido digital entregado no tiene devolución.</p>
     </details>
   </section>
 
-  <section style="margin-top:48px;text-align:center;">
-    <a class="btn ghost" href="https://www.instagram.com/greykuromi/" target="_blank" rel="noopener">Escribime por Instagram</a>
+  <section style="margin-top:40px;text-align:center;">
+    <a class="btn ghost" href="https://www.instagram.com/greykuromi/" target="_blank" rel="noopener">HABLAR AL DM EN INSTAGRAM 💋</a>
   </section>
 
   <footer>
-    <div class="mark">✦</div>
-    <p>Kuromi · Colección privada</p>
-    <p class="disclaimer">Imágenes generadas con IA. Uso personal. Prohibida la redistribución.</p>
+    <div class="mark">🦇</div>
+    <p>@void · High-Level Baddie</p>
+    <p class="disclaimer">Contenido exclusivo para mayores de 18 años. Prohibida su redistribución.</p>
   </footer>
 
 </main>
+
+<!-- Modal Preview Teaser -->
+<div class="modal-backdrop" id="modal-preview" onclick="closePreview()">
+  <div class="modal-content" onclick="event.stopPropagation()">
+    <div class="modal-close" onclick="closePreview()">×</div>
+    <div class="relative">
+      <img id="modal-img" src="" alt="Teaser Preview" class="w-full aspect-[3/4] object-cover filter blur-sm brightness-90">
+      <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent flex flex-col items-center justify-end p-6 text-center">
+        <span class="text-xs font-black tracking-widest text-[var(--blood-red)] uppercase mb-1" id="modal-tag">#TEASER</span>
+        <h4 class="text-lg font-extrabold text-white uppercase">Acceso Restringido</h4>
+        <p class="text-xs text-gray-300 mt-1 mb-4">Adquirí el pack para desbloquear la colección sin censura en HD.</p>
+        <a class="btn btn-purple w-full text-xs py-3" href="https://mpago.la/1ELyceL" target="_blank" rel="noopener">DESBLOQUEAR AHORA 🔓</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Particle Canvas Interactive Background
+  const canvas = document.getElementById('bg-canvas');
+  const ctx = canvas.getContext('2d');
+  let width, height;
+  let particles = [];
+
+  function resize() {
+    width = canvas.width = window.innerWidth;
+    height = canvas.height = window.innerHeight;
+  }
+  window.addEventListener('resize', resize);
+  resize();
+
+  class Particle {
+    constructor() {
+      this.reset();
+    }
+    reset() {
+      this.x = Math.random() * width;
+      this.y = Math.random() * height;
+      this.size = Math.random() * 2 + 0.5;
+      this.speedY = -(Math.random() * 0.4 + 0.1);
+      this.speedX = (Math.random() - 0.5) * 0.2;
+      this.opacity = Math.random() * 0.5 + 0.2;
+      this.color = Math.random() > 0.4 ? '139, 0, 255' : '217, 4, 41';
+    }
+    update() {
+      this.y += this.speedY;
+      this.x += this.speedX;
+      if (this.y < 0) this.reset();
+    }
+    draw() {
+      ctx.fillStyle = `rgba(${this.color}, ${this.opacity})`;
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  }
+
+  for (let i = 0; i < 45; i++) {
+    particles.push(new Particle());
+  }
+
+  function animate() {
+    ctx.clearRect(0, 0, width, height);
+    particles.forEach(p => {
+      p.update();
+      p.draw();
+    });
+    requestAnimationFrame(animate);
+  }
+  animate();
+
+  // Currency switch logic
+  const prices = {
+    ARS: { p1: '$2.000', p2: '$10.000', curr: 'ARS' },
+    USD: { p1: '$5', p2: '$20', curr: 'USD' }
+  };
+
+  function setCurrency(curr) {
+    document.getElementById('btn-ars').classList.toggle('active', curr === 'ARS');
+    document.getElementById('btn-usd').classList.toggle('active', curr === 'USD');
+    
+    document.getElementById('price-1').childNodes[0].nodeValue = prices[curr].p1 + ' ';
+    document.getElementById('curr-1').innerText = prices[curr].curr;
+
+    document.getElementById('price-2').childNodes[0].nodeValue = prices[curr].p2 + ' ';
+    document.getElementById('curr-2').innerText = prices[curr].curr;
+  }
+
+  // Modal Preview Logic
+  function openPreview(imgSrc, tagText) {
+    const modal = document.getElementById('modal-preview');
+    const modalImg = document.getElementById('modal-img');
+    const modalTag = document.getElementById('modal-tag');
+
+    modalImg.src = imgSrc;
+    modalTag.innerText = tagText;
+    modal.classList.add('open');
+  }
+
+  function closePreview() {
+    document.getElementById('modal-preview').classList.remove('open');
+  }
+
+  // Dynamic urgency slots
+  let slots = 3;
+  setInterval(() => {
+    if (Math.random() > 0.7 && slots > 1) {
+      slots--;
+      document.getElementById('slots-count').innerText = slots + ' libres';
+    }
+  }, 12000);
+</script>
+
 </body>
 </html>
+``````html
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>@void // Colección Privada</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  :root {
+    --bg-dark: #07090D;
+    --blood-red: #D90429;
+    --neon-purple: #8B00FF;
+    --latex-sheen: #141821;
+    --border-glow: rgba(217, 4, 41, 0.35);
+    --text-main: #F5F5F7;
+    --text-muted: rgba(245, 245, 247, 0.65);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Montserrat', system-ui, -apple-system, sans-serif;
+    background: var(--bg-dark);
+    color: var(--text-main);
+    min-height: 100vh;
+    padding: env(safe-area-inset-top, 0px) 0 env(safe-area-inset-bottom, 0px);
+    overflow-x: hidden;
+  }
+
+  /* Canvas background */
+  #bg-canvas {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  body::before {
+    content: "";
+    position: fixed; inset: 0;
+    background:
+      radial-gradient(circle at 50% -10%, rgba(139, 0, 255, 0.28), transparent 60%),
+      radial-gradient(circle at 100% 100%, rgba(217, 4, 41, 0.2), transparent 50%),
+      radial-gradient(circle at 0% 80%, rgba(139, 0, 255, 0.15), transparent 50%);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  main { position: relative; z-index: 2; max-width: 480px; margin: 0 auto; padding: 24px 16px 64px; }
+
+  /* Hero Elements */
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 10px; letter-spacing: 4px; text-transform: uppercase;
+    color: var(--blood-red);
+    border: 1px solid var(--border-glow);
+    padding: 6px 16px; border-radius: 999px;
+    margin-bottom: 18px;
+    background: rgba(217, 4, 41, 0.08);
+    box-shadow: 0 0 15px rgba(217, 4, 41, 0.2);
+  }
+
+  .hero h1 {
+    font-size: clamp(38px, 11vw, 54px);
+    font-weight: 900; line-height: 0.98;
+    letter-spacing: -1.5px;
+    text-transform: uppercase;
+  }
+  .hero h1 span.purple { color: var(--neon-purple); text-shadow: 0 0 25px rgba(139,0,255,0.6); }
+  .hero h1 span.blood { color: var(--blood-red); text-shadow: 0 0 25px rgba(217,4,41,0.6); }
+
+  .hero p {
+    margin-top: 14px;
+    font-size: 14px; line-height: 1.5;
+    color: var(--text-muted);
+    font-weight: 600;
+  }
+
+  .hero-banner-wrap {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    margin-top: 22px;
+    border: 1px solid var(--border-glow);
+    box-shadow: 0 12px 35px rgba(0,0,0,0.85), 0 0 20px rgba(139,0,255,0.25);
+  }
+
+  .hero-banner-wrap img {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    display: block;
+    filter: brightness(0.92) contrast(1.08);
+  }
+
+  .section-title {
+    text-align: center;
+    font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--blood-red);
+    margin: 48px 0 18px;
+    font-weight: 900;
+    display: flex; align-items: center; justify-content: center; gap: 12px;
+  }
+  .section-title::before, .section-title::after {
+    content: ""; height: 1px; width: 28px;
+    background: linear-gradient(90deg, transparent, var(--border-glow));
+  }
+  .section-title::after { background: linear-gradient(270deg, transparent, var(--border-glow)); }
+
+  /* Gallery Grid */
+  .gallery {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
+  }
+  .gallery-item {
+    position: relative;
+    aspect-ratio: 3 / 4;
+    border-radius: 12px;
+    background: var(--latex-sheen);
+    border: 1px solid var(--border-glow);
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+  }
+  .gallery-item:hover {
+    transform: translateY(-3px);
+    border-color: var(--neon-purple);
+    box-shadow: 0 8px 20px rgba(139, 0, 255, 0.4);
+  }
+  .gallery-item img {
+    width: 100%; height: 100%; object-fit: cover; display: block; filter: brightness(0.9);
+  }
+  .gallery-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(0deg, rgba(7,9,13,0.85) 0%, transparent 60%);
+    display: flex; align-items: flex-end; justify-content: center;
+    padding: 8px;
+  }
+
+  /* Currency Switcher */
+  .currency-switch {
+    display: flex; justify-content: center; gap: 6px;
+    margin: 20px 0 24px;
+  }
+  .currency-btn {
+    background: rgba(20, 24, 33, 0.6);
+    border: 1px solid var(--border-glow);
+    color: var(--text-muted);
+    font-size: 11px; font-weight: 800; letter-spacing: 1px;
+    padding: 6px 14px; border-radius: 999px;
+    cursor: pointer; transition: all 0.2s ease;
+  }
+  .currency-btn.active {
+    background: var(--blood-red);
+    color: #fff;
+    border-color: var(--blood-red);
+    box-shadow: 0 0 12px rgba(217, 4, 41, 0.5);
+  }
+
+  /* Offers Section */
+  .offers { display: grid; gap: 16px; }
+  .offer {
+    background: rgba(20, 24, 33, 0.75);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--border-glow);
+    border-radius: 20px;
+    padding: 24px 20px;
+    position: relative;
+    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+  }
+  .offer:hover {
+    border-color: rgba(139, 0, 255, 0.5);
+    box-shadow: 0 8px 28px rgba(139, 0, 255, 0.25);
+  }
+  .offer.featured {
+    background: linear-gradient(160deg, rgba(139,0,255,0.22), rgba(20,24,33,0.9));
+    border: 1.5px solid var(--neon-purple);
+    box-shadow: 0 0 30px rgba(139,0,255,0.35);
+  }
+  .badge {
+    position: absolute; top: -11px; right: 18px;
+    background: var(--blood-red); color: #fff;
+    font-size: 9px; font-weight: 900; letter-spacing: 2px; text-transform: uppercase;
+    padding: 4px 12px; border-radius: 999px;
+    box-shadow: 0 0 12px rgba(217,4,41,0.6);
+  }
+  .offer h3 { font-size: 20px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; }
+  .offer .sub { font-size: 13px; color: var(--text-muted); margin-top: 5px; line-height: 1.45; font-weight: 500; }
+  .price {
+    font-size: 38px; font-weight: 900; color: #fff; margin: 16px 0 4px;
+    letter-spacing: -1.5px; display: flex; align-items: baseline; gap: 6px;
+  }
+  .price small { font-size: 13px; font-weight: 700; color: var(--neon-purple); letter-spacing: 0; }
+  .offer ul { list-style: none; margin: 16px 0 22px; display: grid; gap: 9px; }
+  .offer li {
+    font-size: 13px; line-height: 1.4; color: var(--text-main); font-weight: 600;
+    padding-left: 20px; position: relative;
+  }
+  .offer li::before {
+    content: "🩸"; position: absolute; left: 0; top: 0px; font-size: 11px;
+  }
+
+  /* Buttons */
+  .btn {
+    display: flex; align-items: center; justify-content: center; text-align: center;
+    text-decoration: none;
+    font-family: inherit; font-weight: 900; font-size: 13px;
+    letter-spacing: 2px; text-transform: uppercase;
+    padding: 16px; border-radius: 14px;
+    background: var(--blood-red); color: #fff;
+    box-shadow: 0 4px 20px rgba(217,4,41,0.4);
+    transition: transform .25s ease, filter .25s ease, box-shadow .25s ease;
+    cursor: pointer; border: none;
+  }
+  .btn:hover { filter: brightness(1.15); transform: translateY(-2px); box-shadow: 0 8px 25px rgba(217,4,41,0.6); }
+  .btn-purple {
+    background: linear-gradient(135deg, var(--neon-purple), #5B00B2);
+    box-shadow: 0 4px 20px rgba(139,0,255,0.4);
+  }
+  .btn-purple:hover { box-shadow: 0 8px 30px rgba(139,0,255,0.7); }
+  .btn.ghost {
+    background: rgba(255,255,255,0.04); color: var(--text-main);
+    border: 1px solid rgba(245,245,247,0.2);
+    box-shadow: none;
+  }
+  .btn.ghost:hover { background: rgba(255,255,255,0.08); border-color: var(--neon-purple); }
+  .pay-note {
+    display: block; text-align: center; margin-top: 10px;
+    font-size: 10px; color: var(--text-muted); letter-spacing: .5px; text-transform: uppercase; font-weight: 700;
+  }
+
+  /* Steps */
+  .steps { display: grid; gap: 10px; }
+  .step {
+    display: flex; gap: 14px; align-items: center;
+    padding: 16px 18px; border-radius: 16px;
+    background: rgba(20, 24, 33, 0.55); border: 1px solid var(--border-glow);
+  }
+  .step b { font-size: 18px; color: var(--blood-red); min-width: 26px; font-weight: 900; }
+  .step p { font-size: 13px; line-height: 1.4; color: var(--text-main); font-weight: 600; }
+
+  /* Accordion FAQ */
+  details {
+    background: rgba(20, 24, 33, 0.55);
+    border-radius: 14px;
+    border: 1px solid var(--border-glow);
+    margin-bottom: 10px;
+    padding: 15px 18px;
+    transition: border-color 0.2s ease;
+  }
+  details[open] { border-color: var(--neon-purple); }
+  summary {
+    cursor: pointer; font-weight: 700; font-size: 14px; color: var(--text-main);
+    list-style: none; display: flex; justify-content: space-between; align-items: center;
+  }
+  summary::-webkit-details-marker { display: none; }
+  summary::after { content: "+"; color: var(--blood-red); font-size: 18px; font-weight: 900; }
+  details[open] summary::after { content: "−"; color: var(--neon-purple); }
+  details p { margin-top: 10px; font-size: 13px; line-height: 1.5; color: var(--text-muted); font-weight: 500; }
+
+  /* Modal Preview */
+  .modal-backdrop {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(8px);
+    z-index: 100; display: flex; align-items: center; justify-content: center; padding: 20px;
+    opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
+  }
+  .modal-backdrop.open { opacity: 1; pointer-events: auto; }
+  .modal-content {
+    position: relative; max-width: 380px; width: 100%; background: #0F121A;
+    border: 1px solid var(--border-glow); border-radius: 20px; overflow: hidden;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.9);
+  }
+  .modal-close {
+    position: absolute; top: 12px; right: 12px; z-index: 10;
+    width: 32px; height: 32px; border-radius: 50%; background: rgba(0,0,0,0.6);
+    color: #fff; display: flex; align-items: center; justify-content: center;
+    font-size: 18px; font-weight: 900; cursor: pointer; border: 1px solid rgba(255,255,255,0.2);
+  }
+
+  footer {
+    text-align: center; margin-top: 52px;
+    font-size: 11px; color: var(--text-muted); letter-spacing: 1px;
+  }
+  footer .mark { font-size: 22px; margin-bottom: 6px; color: var(--blood-red); text-shadow: 0 0 10px var(--blood-red); }
+  .disclaimer { margin-top: 10px; font-size: 10px; line-height: 1.4; opacity: .5; text-transform: uppercase; }
+</style>
+</head>
+<body>
+
+<canvas id="bg-canvas"></canvas>
+
+<main>
+
+  <section class="hero text-center">
+    <span class="tag">⛓️ · Explicito & Exclusivo 🩸</span>
+    <h1>Void<br><span class="blood">Fem</span></h1>
+    <p>Látex negro, tinta hexagonal y cero vueltas. Elegí cómo querés entrar a mi privado.</p>
+    
+    <div class="hero-banner-wrap">
+      <img src="banner.jpg" alt="@void" onerror="this.src='https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=800&q=80'">
+    </div>
+  </section>
+
+  <!-- Stock Urgency Bar -->
+  <div class="mt-6 p-3 rounded-xl bg-red-950/40 border border-red-500/30 flex items-center justify-between text-xs">
+    <span class="flex items-center gap-2 text-red-400 font-bold">
+      <span class="w-2 h-2 rounded-full bg-red-500 animate-ping"></span>
+      CUPOS VACANTES LIMITADOS
+    </span>
+    <span class="font-extrabold text-white bg-red-600/40 px-2 py-0.5 rounded border border-red-500/40" id="slots-count">3 libres</span>
+  </div>
+
+  <h2 class="section-title">Vistazo de la colección</h2>
+  <section class="gallery">
+    <div class="gallery-item" onclick="openPreview('foto1.jpg', '#01 FLASH')">
+      <img src="foto1.jpg" alt="Preview 1" onerror="this.src='https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=400&q=80'">
+      <div class="gallery-overlay"><span class="text-[9px] font-black tracking-widest text-white uppercase">🔍 VER TEASER</span></div>
+    </div>
+    <div class="gallery-item" onclick="openPreview('foto2.jpg', '#02 LATEX')">
+      <img src="foto2.jpg" alt="Preview 2" onerror="this.src='https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=400&q=80'">
+      <div class="gallery-overlay"><span class="text-[9px] font-black tracking-widest text-white uppercase">🔍 VER TEASER</span></div>
+    </div>
+    <div class="gallery-item" onclick="openPreview('foto3.jpg', '#03 INTIMATE')">
+      <img src="foto3.jpg" alt="Preview 3" onerror="this.src='https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&w=400&q=80'">
+      <div class="gallery-overlay"><span class="text-[9px] font-black tracking-widest text-white uppercase">🔍 VER TEASER</span></div>
+    </div>
+  </section>
+
+  <h2 class="section-title">Menú de Accesos</h2>
+
+  <!-- Selector de moneda -->
+  <div class="currency-switch">
+    <button class="currency-btn active" id="btn-ars" onclick="setCurrency('ARS')">ARS ($)</button>
+    <button class="currency-btn" id="btn-usd" onclick="setCurrency('USD')">USD ($)</button>
+  </div>
+
+  <section class="offers">
+
+    <article class="offer">
+      <h3>Foto Random</h3>
+      <p class="sub">Una imagen sorpresa para probar si te da el cuero.</p>
+      <div class="price" id="price-1">$2.000 <small id="curr-1">ARS</small></div>
+      <ul>
+        <li>1 foto en alta resolución</li>
+        <li>Entrega inmediata por email</li>
+        <li>Formato vertical sin censura</li>
+      </ul>
+      <a class="btn ghost" href="https://mpago.la/2E2SJbt" target="_blank" rel="noopener">Comprar al toque</a>
+      <span class="pay-note">Mercado Pago / Pago Seguro 💳</span>
+    </article>
+
+    <article class="offer featured">
+      <span class="badge">MÁS PEDIDO 🩸</span>
+      <h3>Pack de 10 Fotos</h3>
+      <p class="sub">Diez imágenes directas al hueso. Látex negro, tinta y mirada pesada.</p>
+      <div class="price" id="price-2">$10.000 <small id="curr-2">ARS</small></div>
+      <ul>
+        <li>10 fotos HD exclusivas sin repetir</li>
+        <li>Poses de espalda y cuerpo completo</li>
+        <li>Entrega directa a tu casilla de correo</li>
+      </ul>
+      <a class="btn btn-purple" href="https://mpago.la/1ELyceL" target="_blank" rel="noopener">Activar pack full 🔞</a>
+      <span class="pay-note">Mercado Pago / Pago Seguro 💳</span>
+    </article>
+
+  </section>
+
+  <h2 class="section-title">Cómo se maneja</h2>
+  <section class="steps">
+    <div class="step"><b>01</b><p>Elegís tu opción y pagás al toque con Mercado Pago.</p></div>
+    <div class="step"><b>02</b><p>Te cae el contenido directo a tu correo electrónico.</p></div>
+    <div class="step"><b>03</b><p>Disfrutás en privado. No hay devoluciones.</p></div>
+  </section>
+
+  <h2 class="section-title">Dudas</h2>
+  <section>
+    <details>
+      <summary>¿Qué incluye cada compra?</summary>
+      <p>Material digital en alta resolución. Cero envíos físicos, todo virtual e inmediato.</p>
+    </details>
+    <details>
+      <summary>¿Cuánto demora en llegar?</summary>
+      <p>Apenas se acredita el pago, te lo mando al mail usado en Mercado Pago. Cero vueltas.</p>
+    </details>
+    <details>
+      <summary>¿La máscara de látex se saca?</summary>
+      <p>La máscara de orejas rectas no se saca jamás. Es la marca de la casa. Todo lo demás queda expuesto.</p>
+    </details>
+    <details>
+      <summary>¿Hay reembolsos?</summary>
+      <p>Ni lo pienses. Contenido digital entregado no tiene devolución.</p>
+    </details>
+  </section>
+
+  <section style="margin-top:40px;text-align:center;">
+    <a class="btn ghost" href="https://www.instagram.com/greykuromi/" target="_blank" rel="noopener">HABLAR AL DM EN INSTAGRAM 💋</a>
+  </section>
+
+  <footer>
+    <div class="mark">🦇</div>
+    <p>@void · High-Level Baddie</p>
+    <p class="disclaimer">Contenido exclusivo para mayores de 18 años. Prohibida su redistribución.</p>
+  </footer>
+
+</main>
+
+<!-- Modal Preview Teaser -->
+<div class="modal-backdrop" id="modal-preview" onclick="closePreview()">
+  <div class="modal-content" onclick="event.stopPropagation()">
+    <div class="modal-close" onclick="closePreview()">×</div>
+    <div class="relative">
+      <img id="modal-img" src="" alt="Teaser Preview" class="w-full aspect-[3/4] object-cover filter blur-sm brightness-90">
+      <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent flex flex-col items-center justify-end p-6 text-center">
+        <span class="text-xs font-black tracking-widest text-[var(--blood-red)] uppercase mb-1" id="modal-tag">#TEASER</span>
+        <h4 class="text-lg font-extrabold text-white uppercase">Acceso Restringido</h4>
+        <p class="text-xs text-gray-300 mt-1 mb-4">Adquirí el pack para desbloquear la colección sin censura en HD.</p>
+        <a class="btn btn-purple w-full text-xs py-3" href="https://mpago.la/1ELyceL" target="_blank" rel="noopener">DESBLOQUEAR AHORA 🔓</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Particle Canvas Interactive Background
+  const canvas = document.getElementById('bg-canvas');
+  const ctx = canvas.getContext('2d');
+  let width, height;
+  let particles = [];
+
+  function resize() {
+    width = canvas.width = window.innerWidth;
+    height = canvas.height = window.innerHeight;
+  }
+  window.addEventListener('resize', resize);
+  resize();
+
+  class Particle {
+    constructor() {
+      this.reset();
+    }
+    reset() {
+      this.x = Math.random() * width;
+      this.y = Math.random() * height;
+      this.size = Math.random() * 2 + 0.5;
+      this.speedY = -(Math.random() * 0.4 + 0.1);
+      this.speedX = (Math.random() - 0.5) * 0.2;
+      this.opacity = Math.random() * 0.5 + 0.2;
+      this.color = Math.random() > 0.4 ? '139, 0, 255' : '217, 4, 41';
+    }
+    update() {
+      this.y += this.speedY;
+      this.x += this.speedX;
+      if (this.y < 0) this.reset();
+    }
+    draw() {
+      ctx.fillStyle = `rgba(${this.color}, ${this.opacity})`;
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  }
+
+  for (let i = 0; i < 45; i++) {
+    particles.push(new Particle());
+  }
+
+  function animate() {
+    ctx.clearRect(0, 0, width, height);
+    particles.forEach(p => {
+      p.update();
+      p.draw();
+    });
+    requestAnimationFrame(animate);
+  }
+  animate();
+
+  // Currency switch logic
+  const prices = {
+    ARS: { p1: '$2.000', p2: '$10.000', curr: 'ARS' },
+    USD: { p1: '$5', p2: '$20', curr: 'USD' }
+  };
+
+  function setCurrency(curr) {
+    document.getElementById('btn-ars').classList.toggle('active', curr === 'ARS');
+    document.getElementById('btn-usd').classList.toggle('active', curr === 'USD');
+    
+    document.getElementById('price-1').childNodes[0].nodeValue = prices[curr].p1 + ' ';
+    document.getElementById('curr-1').innerText = prices[curr].curr;
+
+    document.getElementById('price-2').childNodes[0].nodeValue = prices[curr].p2 + ' ';
+    document.getElementById('curr-2').innerText = prices[curr].curr;
+  }
+
+  // Modal Preview Logic
+  function openPreview(imgSrc, tagText) {
+    const modal = document.getElementById('modal-preview');
+    const modalImg = document.getElementById('modal-img');
+    const modalTag = document.getElementById('modal-tag');
+
+    modalImg.src = imgSrc;
+    modalTag.innerText = tagText;
+    modal.classList.add('open');
+  }
+
+  function closePreview() {
+    document.getElementById('modal-preview').classList.remove('open');
+  }
+
+  // Dynamic urgency slots
+  let slots = 3;
+  setInterval(() => {
+    if (Math.random() > 0.7 && slots > 1) {
+      slots--;
+      document.getElementById('slots-count').innerText = slots + ' libres';
+    }
+  }, 12000);
+</script>
+
+</body>
+</html>
+`
