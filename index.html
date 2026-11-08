@@ -6,7 +6,7 @@
 <title>Void Fem // Colección Privada</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Rubik+Wet+Paint&family=Montserrat:ital,wght@0,400;0,700;0,900;1,900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Rubik+Wet+Paint&family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com"></script>
 <style>
   :root {
@@ -19,11 +19,20 @@
     --border-glow: rgba(143, 1, 184, 0.4);
     --border-glow-bright: rgba(201, 10, 228, 0.8);
     --text-main: #F8F5FF;
-    --text-muted: rgba(248, 245, 255, 0.7);
+    --text-muted: rgba(248, 245, 255, 0.65);
 
-    --glass-bg: rgba(45, 1, 96, 0.4);
+    --glass-bg: rgba(45, 1, 96, 0.35);
     --glass-border: rgba(201, 10, 228, 0.3);
     --matte-dark: rgba(13, 1, 46, 0.94);
+
+    --chrome: linear-gradient(180deg,
+      #ffffff 0%,
+      #e7c4ff 16%,
+      #C90AE4 38%,
+      #5a0a86 50%,
+      #b13df0 62%,
+      #f3d9ff 80%,
+      #8F01B8 100%);
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -31,27 +40,30 @@
 
   body {
     font-family: 'Montserrat', system-ui, sans-serif;
+    background: var(--black-htun);
     color: var(--text-main);
     min-height: 100vh;
-    background-color: var(--black-htun);
-    background-image: url('fondo.jpg');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
     padding: env(safe-area-inset-top, 0px) 0 env(safe-area-inset-bottom, 0px);
     overflow-x: hidden;
   }
 
-  /* Velo oscuro sobre el fondo para que se lea todo */
-  body::before {
-    content: "";
+  /* Fondo: la silueta completa, sin recortar, centrada */
+  #fondo {
     position: fixed; inset: 0; z-index: 0; pointer-events: none;
-    background: linear-gradient(180deg, rgba(13,1,46,0.55) 0%, rgba(13,1,46,0.8) 60%, rgba(13,1,46,0.95) 100%);
+    background-color: var(--black-htun);
+    background-image: url("fondo.jpg");
+    background-size: contain;
+    background-position: center center;
+    background-repeat: no-repeat;
+    opacity: 0.75;
+  }
+  /* Velo oscuro suave en los bordes para que el texto se lea */
+  #fondo::after {
+    content: ""; position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(13,1,46,0.55) 0%, rgba(13,1,46,0.15) 40%, rgba(13,1,46,0.85) 100%);
   }
 
-  #bg-canvas {
-    position: fixed; inset: 0; pointer-events: none; z-index: 0;
-  }
+  #bg-canvas { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
 
   .noise-overlay {
     position: fixed; inset: 0; opacity: 0.18; pointer-events: none; z-index: 1;
@@ -60,45 +72,42 @@
 
   main { position: relative; z-index: 2; max-width: 480px; margin: 0 auto; padding: 24px 16px 64px; }
 
-  /* Título principal: cromo líquido con goteo */
-  .chrome-melt {
+  /* Título hero: Rubik Wet Paint con relleno metalizado */
+  .chrome-title {
     font-family: 'Rubik Wet Paint', 'Montserrat', sans-serif;
     font-weight: 400;
     text-transform: lowercase;
     line-height: 0.95;
     font-size: clamp(64px, 18vw, 92px);
     letter-spacing: 1px;
-    background: linear-gradient(180deg,
-      #f5e1ff 0%,
-      #d15cff 22%,
-      #8F01B8 48%,
-      #2D0160 54%,
-      #a014e0 66%,
-      #e7a6ff 84%,
-      #C90AE4 100%);
+    background: var(--chrome);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    filter: drop-shadow(0 0 10px rgba(201,10,228,0.9)) drop-shadow(0 0 26px rgba(143,1,184,0.6));
+    filter: drop-shadow(0 0 6px rgba(201,10,228,0.85)) drop-shadow(0 0 22px rgba(143,1,184,0.6));
+    animation: chromeShine 4s ease-in-out infinite alternate;
+  }
+  @keyframes chromeShine {
+    0%   { background-position: 0% 50%; }
+    100% { background-position: 0% 60%; }
   }
 
-  /* Títulos de sección: mismo estilo, más chicos */
   .section-title-liquid {
     text-align: center;
     font-family: 'Rubik Wet Paint', 'Montserrat', sans-serif;
     font-weight: 400;
     text-transform: lowercase;
-    font-size: 34px;
+    font-size: 36px;
+    line-height: 1.1;
     letter-spacing: 1px;
-    color: transparent;
-    background: linear-gradient(180deg, #f5e1ff 0%, #C90AE4 50%, #8F01B8 100%);
+    background: var(--chrome);
     -webkit-background-clip: text;
     background-clip: text;
-    margin: 48px 0 18px;
-    filter: drop-shadow(0 0 8px rgba(201,10,228,0.7));
+    color: transparent;
+    margin: 56px 0 20px;
+    filter: drop-shadow(0 0 6px rgba(201,10,228,0.7));
   }
 
-  /* Solo textura hexagonal, sin pisar el color de las tarjetas */
   .hex-pattern {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='49' viewBox='0 0 28 49'%3E%3Cg fill-rule='evenodd'%3E%3Cg id='hexagons' fill='%238f01b8' fill-opacity='0.2' fill-rule='nonzero'%3E%3Cpath d='M13.99 9.25l13 7.5v15l-13 7.5L.99 31.75v-15l13-7.5zM0 0h28v4.75L14 12.8 0 4.75V0zm0 49h28v-4.75L14 36.2 0 44.25V49z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
   }
@@ -217,12 +226,12 @@
   .pay-note { display: block; text-align: center; margin-top: 10px; font-size: 10px; color: var(--text-muted); letter-spacing: .5px; text-transform: uppercase; font-weight: 700; }
 
   .steps { display: grid; gap: 10px; }
-  .step { display: flex; gap: 14px; align-items: center; padding: 16px 18px; border-radius: 16px; background: rgba(45, 1, 96, 0.45); border: 1px solid var(--border-glow); }
+  .step { display: flex; gap: 14px; align-items: center; padding: 16px 18px; border-radius: 16px; background: rgba(45, 1, 96, 0.4); border: 1px solid var(--border-glow); }
   .step b { font-size: 18px; color: var(--fungal-hallucination); min-width: 26px; font-weight: 900; }
   .step p { font-size: 13px; line-height: 1.4; color: var(--text-main); font-weight: 600; }
 
-  details { background: rgba(45, 1, 96, 0.4); border-radius: 14px; border: 1px solid var(--border-glow); margin-bottom: 10px; padding: 15px 18px; }
-  details[open] { border-color: var(--fungal-hallucination); background: rgba(88, 1, 139, 0.5); }
+  details { background: rgba(45, 1, 96, 0.35); border-radius: 14px; border: 1px solid var(--border-glow); margin-bottom: 10px; padding: 15px 18px; }
+  details[open] { border-color: var(--fungal-hallucination); background: rgba(88, 1, 139, 0.45); }
   summary { cursor: pointer; font-weight: 700; font-size: 14px; color: var(--text-main); list-style: none; display: flex; justify-content: space-between; align-items: center; }
   summary::-webkit-details-marker { display: none; }
   summary::after { content: "+"; color: var(--fungal-hallucination); font-size: 18px; font-weight: 900; }
@@ -252,6 +261,7 @@
 </head>
 <body>
 
+<div id="fondo" aria-hidden="true"></div>
 <div class="noise-overlay"></div>
 <canvas id="bg-canvas"></canvas>
 
@@ -259,7 +269,7 @@
 
   <section class="hero text-center">
     <span class="tag">⛓️ · Colección Privada 🖤</span>
-    <h1 class="chrome-melt">void<br>fem</h1>
+    <h1 class="chrome-title">void<br>fem</h1>
     <p class="mt-3 text-sm text-[var(--text-muted)]">Máscara de látex negra, blackout geométrico y postura pesada. Mirás de cerca o te quedás afuera, bb.</p>
 
     <div class="hero-banner-wrap hex-pattern">
