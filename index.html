@@ -6,7 +6,7 @@
 <title>Void Fem // Colección Privada</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Rubik+Wet+Paint&family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com"></script>
 <style>
   :root {
@@ -83,22 +83,24 @@
 
   .section-title-liquid {
     text-align: center;
-    font-family: 'Rubik Wet Paint', 'Montserrat', sans-serif;
-    font-weight: 400;
-    text-transform: lowercase;
-    font-size: 36px;
+    font-family: 'Cinzel', 'Montserrat', serif;
+    font-weight: 900;
+    text-transform: uppercase;
+    font-size: 28px;
     line-height: 1.1;
-    letter-spacing: 1px;
+    letter-spacing: 3px;
     background: var(--chrome);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
     margin: 56px 0 20px;
-    filter: drop-shadow(0 0 6px rgba(201,10,228,0.7));
+    filter: drop-shadow(0 0 8px rgba(201,10,228,0.7));
   }
 
-  .hex-pattern {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='49' viewBox='0 0 28 49'%3E%3Cg fill-rule='evenodd'%3E%3Cg id='hexagons' fill='%238f01b8' fill-opacity='0.2' fill-rule='nonzero'%3E%3Cpath d='M13.99 9.25l13 7.5v15l-13 7.5L.99 31.75v-15l13-7.5zM0 0h28v4.75L14 12.8 0 4.75V0zm0 49h28v-4.75L14 36.2 0 44.25V49z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  /* Patrón de Murciélagos estilo Batman */
+  .bat-pattern {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='30' viewBox='0 0 60 30'%3E%3Cpath fill='%238f01b8' fill-opacity='0.15' d='M30,12 C26,5 18,3 10,8 C14,13 15,18 12,23 C20,20 25,24 30,28 C35,24 40,20 48,23 C45,18 46,13 50,8 C42,3 34,5 30,12 Z'/%3E%3C/svg%3E");
+    background-repeat: repeat;
   }
 
   .glass-card {
@@ -200,7 +202,7 @@
   .price small { font-size: 13px; font-weight: 700; color: var(--fungal-hallucination); }
   .offer ul { list-style: none; margin: 16px 0 22px; display: grid; gap: 9px; }
   .offer li { font-size: 13px; line-height: 1.4; color: var(--text-main); font-weight: 600; padding-left: 20px; position: relative; }
-  .offer li::before { content: "🖤"; position: absolute; left: 0; top: 0px; font-size: 11px; }
+  .offer li::before { content: "🦇"; position: absolute; left: 0; top: 0px; font-size: 11px; }
 
   .btn {
     display: flex; align-items: center; justify-content: center; text-align: center; text-decoration: none;
@@ -228,7 +230,7 @@
   details p { margin-top: 10px; font-size: 13px; line-height: 1.5; color: var(--text-muted); font-weight: 500; }
 
   .ig-feed-widget { background: rgba(13, 1, 46, 0.9); border: 1px solid var(--border-glow-bright); border-radius: 20px; padding: 18px; margin-top: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.85); }
-  .ig-post-card { background: rgba(45, 1, 96, 0.4); border: 1px solid var(--border-glow); border-radius: 14px; padding: 14px; margin-top: 12px; }
+  .ig-post-card { background: rgba(45, 1, 96, 0.4); border: 1px solid var(--border-glow); border-radius: 14px; overflow: hidden; margin-top: 12px; }
   .ig-avatar {
     width: 34px; height: 34px; border-radius: 50%; flex-shrink: 0;
     border: 1.5px solid var(--fungal-hallucination);
@@ -258,15 +260,15 @@
 
   <section class="hero text-center">
     <span class="tag">⛓️ · Colección Privada 🖤</span>
-    <img class="hero-title" src="titulo-void.png" alt="@Void // Colección privada">
+    <img class="hero-title" src="titulo-void.png" alt="@Void // Colección privada" onerror="this.onerror=null; this.src='https://placehold.co/360x120/0D012E/C90AE4?text=void+fem';">
     <p class="mt-3 text-sm text-[var(--text-muted)]">Máscara de látex negra, blackout geométrico y postura pesada. Mirás de cerca o te quedás afuera, bb.</p>
 
-    <div class="hero-banner-wrap hex-pattern">
+    <div class="hero-banner-wrap bat-pattern">
       <div class="floating-emoji" style="top: 12px; left: 12px;">🔥</div>
       <div class="floating-emoji" style="bottom: 16px; right: 14px; animation-delay: -1.2s;">💦</div>
       <div class="floating-emoji" style="top: 40%; right: -8px; animation-delay: -0.7s;">🥵</div>
 
-      <img src="banner.jpg" alt="@void">
+      <img src="banner.jpg" alt="@void" onerror="this.onerror=null; this.src='https://placehold.co/400x500/2D0160/C90AE4?text=VOID+EXCLUSIVE';">
       <div class="censor-badge">ACCESO EXCLUSIVO</div>
     </div>
   </section>
@@ -286,15 +288,15 @@
     <div class="floating-emoji" style="top: 35%; left: 30%; animation-delay: -0.5s;">🥵</div>
 
     <div class="gallery-item" onclick="openPreview('foto1.jpg', '#01 FLASH')">
-      <img src="foto1.jpg" alt="Preview 1">
+      <img src="foto1.jpg" alt="Preview 1" onerror="this.onerror=null; this.src='https://placehold.co/300x400/2D0160/F8F5FF?text=PREVIEW+01';">
       <div class="gallery-overlay"><span class="text-[9px] font-black tracking-widest text-white uppercase">👁️ VER MÁS</span></div>
     </div>
     <div class="gallery-item" onclick="openPreview('foto2.jpg', '#02 BLACKOUT')">
-      <img src="foto2.jpg" alt="Preview 2">
+      <img src="foto2.jpg" alt="Preview 2" onerror="this.onerror=null; this.src='https://placehold.co/300x400/2D0160/F8F5FF?text=PREVIEW+02';">
       <div class="gallery-overlay"><span class="text-[9px] font-black tracking-widest text-white uppercase">👁️ VER MÁS</span></div>
     </div>
     <div class="gallery-item" onclick="openPreview('foto3.jpg', '#03 INTIMATE')">
-      <img src="foto3.jpg" alt="Preview 3">
+      <img src="foto3.jpg" alt="Preview 3" onerror="this.onerror=null; this.src='https://placehold.co/300x400/2D0160/F8F5FF?text=PREVIEW+03';">
       <div class="gallery-overlay"><span class="text-[9px] font-black tracking-widest text-white uppercase">👁️ VER MÁS</span></div>
     </div>
   </section>
@@ -308,7 +310,7 @@
 
   <section class="offers">
 
-    <article class="offer glass-card hex-pattern">
+    <article class="offer glass-card bat-pattern">
       <h3>Foto Random 🩸</h3>
       <p class="sub">Una imagen sorpresa para probar si te da el cuero.</p>
       <div class="price" id="price-1">$2.000 <small id="curr-1">ARS</small></div>
@@ -321,7 +323,7 @@
       <span class="pay-note">Mercado Pago / Seguro 💳</span>
     </article>
 
-    <article class="offer glass-card featured hex-pattern">
+    <article class="offer glass-card featured bat-pattern">
       <span class="badge">MÁS DESEADO 🖤</span>
       <h3>Pack de 10 Fotos VIP 🔥</h3>
       <p class="sub">Diez imágenes exclusivas sin escalas. Te sale la mitad.</p>
@@ -348,9 +350,18 @@
       <a href="https://www.instagram.com/voidprompts.bat/" target="_blank" rel="noopener" class="ml-auto text-[10px] font-black text-[var(--fungal-hallucination)] uppercase border border-[var(--border-glow)] px-2.5 py-1 rounded-full">Seguir</a>
     </div>
 
+    <!-- Vista previa de último post de IG -->
     <div class="ig-post-card">
-      <div class="text-[11px] font-mono text-[var(--text-muted)] space-y-1.5">
-        <p class="text-[var(--fungal-hallucination)] font-bold">📂 void_feed_latest.png</p>
+      <div class="relative aspect-square w-full bg-[var(--deep-violet)] overflow-hidden">
+        <img src="foto1.jpg" alt="Último Post de Instagram" class="w-full h-full object-cover filter contrast-105 brightness-90" onerror="this.onerror=null; this.src='https://placehold.co/400x400/2D0160/C90AE4?text=ÚLTIMO+POST+IG';">
+        <div class="absolute top-2 right-2 bg-black/60 backdrop-blur-md text-white text-[9px] font-mono px-2 py-0.5 rounded-full flex items-center gap-1 border border-white/10">
+          <span>🖤 1.4k</span> · <span>💬 128</span>
+        </div>
+      </div>
+      <div class="p-3 text-[11px] font-mono text-[var(--text-muted)] space-y-1.5 bg-black/40">
+        <p class="text-[var(--fungal-hallucination)] font-bold flex items-center gap-1">
+          <span>📂 void_latest_post.bat</span>
+        </p>
         <p class="text-white font-semibold">no compro con fantasmas, yo juego en otra liga ⛓️🦇</p>
         <p class="text-xs opacity-80">"el algoritmo me pertenece y tu atención también. link en bio, no cuelgues bb."</p>
       </div>
