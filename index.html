@@ -24,15 +24,6 @@
     --glass-bg: rgba(45, 1, 96, 0.35);
     --glass-border: rgba(201, 10, 228, 0.3);
     --matte-dark: rgba(13, 1, 46, 0.94);
-
-    --chrome: linear-gradient(180deg,
-      #ffffff 0%,
-      #e7c4ff 16%,
-      #C90AE4 38%,
-      #5a0a86 50%,
-      #b13df0 62%,
-      #f3d9ff 80%,
-      #8F01B8 100%);
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -83,18 +74,66 @@
 
   .section-title-liquid {
     text-align: center;
-    font-family: 'Cinzel', 'Montserrat', serif;
-    font-weight: 900;
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
     text-transform: uppercase;
-    font-size: 26px;
-    line-height: 1.1;
-    letter-spacing: 2.5px;
-    background: var(--chrome);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    margin: 52px 0 20px;
-    filter: drop-shadow(0 0 6px rgba(201,10,228,0.6));
+    font-size: 22px;
+    line-height: 1.2;
+    letter-spacing: 2px;
+    color: var(--text-main);
+    margin: 48px 0 18px;
+    text-shadow: 0 0 10px rgba(201, 10, 228, 0.4);
+  }
+
+  /* Patrón de Murciélagos estilo Batman */
+  .bat-pattern {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='30' viewBox='0 0 60 30'%3E%3Cpath fill='%238f01b8' fill-opacity='0.15' d='M30,12 C26,5 18,3 10,8 C14,13 15,18 12,23 C20,20 25,24 30,28 C35,24 40,20 48,23 C45,18 46,13 50,8 C42,3 34,5 30,12 Z'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+  }
+
+  /* Tarjeta Muestra Gratuita con Humo y Vapor Violeta Mate */
+  .teaser-free-card {
+    position: relative;
+    border-radius: 20px;
+    background: rgba(13, 1, 46, 0.95);
+    border: 1px solid var(--violet-poison);
+    box-shadow: 0 0 25px rgba(143, 1, 184, 0.35);
+    overflow: hidden;
+    margin-bottom: 24px;
+  }
+
+  .violet-smoke {
+    position: absolute;
+    inset: -30%;
+    background: radial-gradient(circle at 50% 50%, rgba(143, 1, 184, 0.35), transparent 70%);
+    filter: blur(40px);
+    pointer-events: none;
+    animation: vaporFloat 6s ease-in-out infinite alternate;
+  }
+  @keyframes vaporFloat {
+    0% { transform: scale(0.9) translateY(0); opacity: 0.4; }
+    100% { transform: scale(1.1) translateY(-10px); opacity: 0.8; }
+  }
+
+  .teaser-free-preview {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16/9;
+    border-radius: 14px;
+    overflow: hidden;
+    cursor: pointer;
+    border: 1px solid rgba(201, 10, 228, 0.3);
+  }
+  .teaser-free-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: blur(14px) brightness(0.65);
+    transition: filter 0.3s ease, transform 0.3s ease;
+  }
+  .teaser-free-preview:hover img {
+    filter: blur(10px) brightness(0.8);
+    transform: scale(1.02);
   }
 
   /* Patrón de Murciélagos estilo Batman */
@@ -304,9 +343,9 @@
 <main>
 
   <section class="hero text-center">
-    <span class="tag">⛓️ · Colección Privada 🖤</span>
+    <span class="tag">⛓️ · ARCHIVO PRIVADO  🖤</span>
     <img class="hero-title" src="titulo-void.png" alt="@Void // Colección privada" onerror="this.onerror=null; this.src='https://placehold.co/360x120/0D012E/C90AE4?text=void+fem';">
-    <p class="mt-3 text-sm text-[var(--text-muted)]">Máscara de látex negra, blackout geométrico y postura pesada. Mirás de cerca o te quedás afuera, bb.</p>
+    <p class="mt-3 text-sm text-[var(--text-muted)]">Látex, blackout y más. Tocás acá o solo miras?. 🖤🔥.</p>
 
     <div class="hero-banner-wrap bat-pattern">
       <div class="floating-emoji" style="top: 12px; left: 12px;">🔥</div>
@@ -314,43 +353,34 @@
       <div class="floating-emoji" style="top: 40%; right: -8px; animation-delay: -0.7s;">🥵</div>
 
       <img src="banner.jpg" alt="@void" onerror="this.onerror=null; this.src='https://placehold.co/400x500/2D0160/C90AE4?text=VOID+EXCLUSIVE';">
-      <div class="censor-badge">ACCESO EXCLUSIVO</div>
+      <div class="censor-badge">ACCESO DIRECTO</div>
     </div>
   </section>
 
   <div class="mt-6 p-3.5 rounded-xl glass-card-matte flex items-center justify-between text-xs">
     <span class="flex items-center gap-2 text-[var(--fungal-hallucination)] font-bold">
       <span class="w-2 h-2 rounded-full bg-[var(--fungal-hallucination)] animate-ping"></span>
-      ENTREGA INMEDIATA AL MAIL
+      DESCARGA INMEDIATA EN MAIL
     </span>
     <span class="font-extrabold text-white bg-[var(--violet-poison)]/40 px-2.5 py-1 rounded-md border border-[var(--border-glow-bright)]" id="slots-count">2 cupos libres</span>
   </div>
 
   <!-- SECCIÓN TEASER EXCLUSIVO GRATIS -->
-  <h2 class="section-title-liquid">dosis gratis 🖤</h2>
-  <div class="teaser-free-card p-4">
-    <div class="smoke-glow"></div>
+  <h2 class="section-title-liquid">Viste?</h2>
+  <div class="teaser-free-card p-3">
+    <div class="violet-smoke"></div>
     <div class="relative z-10 flex flex-col items-center text-center">
-      <div class="flex items-center gap-2 mb-2">
-        <span class="text-[10px] font-black tracking-widest text-[var(--fungal-hallucination)] uppercase bg-[var(--deep-violet)]/80 px-3 py-1 rounded-full border border-[var(--border-glow-bright)] shadow-[0_0_12px_rgba(201,10,228,0.5)]">
-          🎁 MUESTRA GRATUITA EXCLUSIVA
-        </span>
-      </div>
-
-      <div class="teaser-free-preview my-2" onclick="openFreePreview('foto4.jpg', '#04 UNLOCKED FREE')">
-        <img src="foto4.jpg" alt="Foto 4 Gratis" onerror="this.onerror=null; this.src='https://placehold.co/600x350/2D0160/F8F5FF?text=FREE+PREVIEW+UNLOCKED';">
-        <div class="absolute inset-0 flex flex-col items-center justify-center p-4 bg-gradient-to-t from-black/80 via-black/30 to-transparent">
-          <span class="text-xl mb-1 filter drop-shadow-[0_0_8px_var(--fungal-hallucination)]">👁️</span>
-          <span class="text-xs font-black tracking-widest text-white uppercase drop-shadow">TOCA PARA VER COMPLETA EN HD</span>
-          <span class="text-[9px] text-[var(--text-muted)] mt-1 font-mono">100% GRATIS · SIN CENSURA</span>
+      <div class="teaser-free-preview w-full" onclick="openFreePreview('foto4.jpg', '#FREE UNLOCKED')">
+        <img src="foto4.jpg" alt="Foto 4 Gratis" onerror="this.onerror=null; this.src='https://placehold.co/600x350/0D012E/8F01B8?text=FREE+PREVIEW';">
+        <div class="absolute inset-0 flex flex-col items-center justify-center p-4 bg-black/40">
+          <span class="text-2xl mb-1 filter drop-shadow-[0_0_8px_var(--fungal-hallucination)]">👁️</span>
+          <span class="text-xs font-bold tracking-widest text-white uppercase">Ver</span>
         </div>
       </div>
-
-      <p class="text-xs text-[var(--text-muted)] mt-1 font-medium">Prueba la textura y el ángulo sin pagar nada. Mirá de cerca, bb.</p>
     </div>
   </div>
 
-  <h2 class="section-title-liquid">vistazo teaser</h2>
+  <h2 class="section-title-liquid">Galeria privada</h2>
   <section class="gallery">
     <div class="floating-emoji" style="top: -16px; right: 8px;">🔥</div>
     <div class="floating-emoji" style="bottom: -12px; left: -8px; animation-delay: -1.5s;">💦</div>
@@ -370,7 +400,7 @@
     </div>
   </section>
 
-  <h2 class="section-title-liquid">elegí tu dosis</h2>
+  <h2 class="section-title-liquid">Elegí</h2>
 
   <div class="currency-switch">
     <button class="currency-btn active" id="btn-ars" onclick="setCurrency('ARS')">ARS ($)</button>
@@ -380,35 +410,35 @@
   <section class="offers">
 
     <article class="offer glass-card bat-pattern">
-      <h3>Foto Random 🩸</h3>
-      <p class="sub">Una imagen sorpresa para probar si te da el cuero.</p>
+      <h3>Foto Individual 🩸</h3>
+      <p class="sub">Una imagen sorpresa para probar si te gusta mi latex.</p>
       <div class="price" id="price-1">$2.000 <small id="curr-1">ARS</small></div>
       <ul>
         <li>1 foto digital HD en alta resolución</li>
         <li>Entrega inmediata a tu correo</li>
-        <li>Sin censura y directo al hueso</li>
+        <li>Sin censura y directo</li>
       </ul>
-      <a class="btn ghost" href="https://mpago.la/2E2SJbt" target="_blank" rel="noopener">PROBAR AL TOQUE 🔥</a>
+      <a class="btn ghost" href="https://mpago.la/2E2SJbt" target="_blank" rel="noopener">Obtener ahora 🔥</a>
       <span class="pay-note">Mercado Pago / Seguro 💳</span>
     </article>
 
     <article class="offer glass-card featured bat-pattern">
-      <span class="badge">MÁS DESEADO 🖤</span>
-      <h3>Pack de 10 Fotos VIP 🔥</h3>
-      <p class="sub">Diez imágenes exclusivas sin escalas. Te sale la mitad.</p>
+      <span class="badge">MÁS VISTO 🖤</span>
+      <h3>Pack de 10 Fotos personalizadas 🔥</h3>
+      <p class="sub">Diez imágenes exclusivas sin restriccion.</p>
       <div class="price" id="price-2">$10.000 <small id="curr-2">ARS</small></div>
       <ul>
         <li>10 fotos HD exclusivas sin repetir</li>
-        <li>Látex, tinta y mirada pesada</li>
+        <li>Látex, tinta y más</li>
         <li>Acceso instantáneo al mail</li>
       </ul>
-      <a class="btn btn-purple" href="https://mpago.la/1ELyceL" target="_blank" rel="noopener">ACTIVAR PACK FULL 🔓</a>
+      <a class="btn btn-purple" href="https://mpago.la/1ELyceL" target="_blank" rel="noopener">OBTENER PACK FULL 🔓</a>
       <span class="pay-note">Mercado Pago / Seguro 💳</span>
     </article>
 
   </section>
 
-  <h2 class="section-title-liquid">feed // @voidprompts.bat</h2>
+  <h2 class="section-title-liquid">Instagram // @voidprompts.bat</h2>
   <section class="ig-feed-widget">
     <div class="ig-post-header flex items-center gap-3">
       <div class="ig-avatar">V</div>
@@ -431,41 +461,38 @@
         <p class="text-[var(--fungal-hallucination)] font-bold flex items-center gap-1">
           <span>📂 void_latest_post.bat</span>
         </p>
-        <p class="text-white font-semibold">no compro con fantasmas, yo juego en otra liga ⛓️🦇</p>
-        <p class="text-xs opacity-80">"el algoritmo me pertenece y tu atención también. link en bio, no cuelgues bb."</p>
+        <p class="text-white font-semibold">no compro con fantasmas, los cazo ⛓️🦇</p>
+        <p class="text-xs opacity-80">"el algoritmo me pertenece y tu atención también. link en bio"</p>
       </div>
     </div>
   </section>
 
   <h2 class="section-title-liquid">cómo se maneja</h2>
   <section class="steps">
-    <div class="step"><b>01</b><p>Elegís tu opción y pagás al toque.</p></div>
-    <div class="step"><b>02</b><p>Te cae el contenido directo al correo al instante.</p></div>
-    <div class="step"><b>03</b><p>Te callás y disfrutás. No hay devoluciones.</p></div>
+    <div class="step"><b>01</b><p>Elegís tu opción y confirmás el pago.</p></div>
+    <div class="step"><b>02</b><p>Recibís el enlace directo en tu correo al instante.</p></div>
+    <div class="step"><b>03</b><p>Acceso inmediato y sin intermediarios.</p></div>
   </section>
 
   <h2 class="section-title-liquid">dudas</h2>
   <section>
     <details>
-      <summary>¿Qué incluye cada compra?</summary>
-      <p>Material digital en alta resolución. Cero envíos físicos, todo virtual e inmediato.</p>
+      <summary>¿Cómo se entrega el material?</summary>
+      <p>Es contenido digital en alta resolución enviado de forma automática a tu correo.</p>
     </details>
     <details>
       <summary>¿Cuánto demora en llegar?</summary>
-      <p>Apenas entra el pago, te lo mando al mail. Si tardás en pagar, esperás.</p>
+      <p>La entrega es instantánea una vez acreditado el pago. o luego de hacer el pedido.</p>
     </details>
     <details>
       <summary>¿La máscara se saca?</summary>
-      <p>La máscara de látex negro con orejas rectas no se saca jamás. Es la firma de la casa.</p>
+      <p>La máscara de látex negro con orejas rectas no se saca jamás.</p>
     </details>
-    <details>
-      <summary>¿Hay reembolsos?</summary>
-      <p>Ni en pedo. Contenido digital consumido, no se devuelve.</p>
-    </details>
+  
   </section>
 
   <section style="margin-top:40px;text-align:center;">
-    <a class="btn ghost" href="https://www.instagram.com/voidprompts.bat/" target="_blank" rel="noopener">ESCRIBIME AL DM 💋</a>
+    <a class="btn ghost" href="https://www.instagram.com/voidprompts.bat/" target="_blank" rel="noopener">Seguime y mandame tu mensaje 💋</a>
   </section>
 
   <footer>
@@ -479,11 +506,15 @@
 <div class="modal-backdrop" id="modal-preview" onclick="closePreview()">
   <div class="modal-content" onclick="event.stopPropagation()">
     <div class="modal-close" onclick="closePreview()">×</div>
-    <div class="relative">
-      <img id="modal-img" src="" alt="Teaser Preview" class="w-full aspect-[3/4] object-cover filter blur-md brightness-90">
-      <div class="absolute inset-0 bg-gradient-to-t from-[var(--black-htun)] via-[var(--black-htun)]/50 to-transparent flex flex-col items-center justify-end p-6 text-center" id="modal-overlay-content">
-        <span class="text-xs font-black tracking-widest text-[var(--fungal-hallucination)] uppercase mb-1" id="modal-tag">#TEASER</span>
-        <h4 class="text-lg font-extrabold text-white uppercase" id="modal-title">Acceso Restringido</h4>
+    <div class="relative overflow-hidden">
+      <!-- Humo de vapor dentro del modal -->
+      <div id="modal-vapor" class="violet-smoke opacity-0 transition-opacity duration-500"></div>
+      
+      <img id="modal-img" src="" alt="Teaser Preview" class="w-full aspect-[3/4] object-cover transition-all duration-300">
+      
+      <div class="absolute inset-0 bg-gradient-to-t from-[var(--black-htun)] via-[var(--black-htun)]/40 to-transparent flex flex-col items-center justify-end p-6 text-center" id="modal-overlay-content">
+        <span class="text-xs font-bold tracking-widest text-[var(--fungal-hallucination)] uppercase mb-1" id="modal-tag">#TEASER</span>
+        <h4 class="text-base font-bold text-white uppercase" id="modal-title">Acceso Restringido</h4>
         <p class="text-xs text-gray-300 mt-1 mb-4" id="modal-desc">Adquirí el pack para desbloquear la colección en HD.</p>
         <a class="btn btn-purple w-full text-xs py-3" id="modal-cta" href="https://mpago.la/1ELyceL" target="_blank" rel="noopener">DESBLOQUEAR AHORA 🔓</a>
       </div>
@@ -550,8 +581,11 @@
 
   function openPreview(imgSrc, tagText) {
     const imgEl = document.getElementById('modal-img');
+    const vaporEl = document.getElementById('modal-vapor');
     imgEl.src = imgSrc;
     imgEl.className = 'w-full aspect-[3/4] object-cover filter blur-md brightness-90';
+    vaporEl.classList.add('opacity-0');
+    
     document.getElementById('modal-tag').innerText = tagText;
     document.getElementById('modal-title').innerText = 'Acceso Restringido';
     document.getElementById('modal-desc').innerText = 'Adquirí el pack para desbloquear la colección en HD.';
@@ -566,14 +600,17 @@
 
   function openFreePreview(imgSrc, tagText) {
     const imgEl = document.getElementById('modal-img');
+    const vaporEl = document.getElementById('modal-vapor');
     imgEl.src = imgSrc;
     imgEl.className = 'w-full aspect-[3/4] object-cover filter none brightness-100';
+    vaporEl.classList.remove('opacity-0');
+    
     document.getElementById('modal-tag').innerText = tagText;
-    document.getElementById('modal-title').innerText = 'Vista Gratuita Desbloqueada 🖤';
-    document.getElementById('modal-desc').innerText = '¿Te gustó el teaser? El pack completo tiene 10 fotos HD sin censura.';
+    document.getElementById('modal-title').innerText = 'Muestra Gratuita 🖤';
+    document.getElementById('modal-desc').innerText = 'Imagen sin censura disponible.';
     
     const ctaBtn = document.getElementById('modal-cta');
-    ctaBtn.innerText = 'QUIERO EL PACK COMPLETO 🔓';
+    ctaBtn.innerText = 'CONSEGUIR PACK FULL 🔓';
     ctaBtn.href = 'https://mpago.la/1ELyceL';
     ctaBtn.style.display = 'flex';
 
