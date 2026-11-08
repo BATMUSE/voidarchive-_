@@ -3,338 +3,305 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>@void // Colección Privada</title>
+<title>Void Fem // Colección Privada</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Rubik+Wet+Paint&family=Montserrat:ital,wght@0,400;0,700;0,900;1,900&display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com"></script>
 <style>
   :root {
-    --bg-dark: #07090D;
-    --blood-red: #D90429;
-    --neon-purple: #8B00FF;
-    --latex-sheen: #141821;
-    --border-glow: rgba(217, 4, 41, 0.35);
-    --text-main: #F5F5F7;
-    --text-muted: rgba(245, 245, 247, 0.65);
+    --black-htun: #0D012E;
+    --deep-violet: #2D0160;
+    --sql-purple: #58018B;
+    --violet-poison: #8F01B8;
+    --fungal-hallucination: #C90AE4;
+
+    --border-glow: rgba(143, 1, 184, 0.4);
+    --border-glow-bright: rgba(201, 10, 228, 0.8);
+    --text-main: #F8F5FF;
+    --text-muted: rgba(248, 245, 255, 0.7);
+
+    --glass-bg: rgba(45, 1, 96, 0.4);
+    --glass-border: rgba(201, 10, 228, 0.3);
+    --matte-dark: rgba(13, 1, 46, 0.94);
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
 
   body {
-    font-family: 'Montserrat', system-ui, -apple-system, sans-serif;
-    background: var(--bg-dark);
+    font-family: 'Montserrat', system-ui, sans-serif;
     color: var(--text-main);
     min-height: 100vh;
+    background-color: var(--black-htun);
+    background-image: url('fondo.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
     padding: env(safe-area-inset-top, 0px) 0 env(safe-area-inset-bottom, 0px);
     overflow-x: hidden;
   }
 
-  /* Canvas background */
-  #bg-canvas {
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: 0;
-  }
-
+  /* Velo oscuro sobre el fondo para que se lea todo */
   body::before {
     content: "";
-    position: fixed; inset: 0;
-    background:
-      radial-gradient(circle at 50% -10%, rgba(139, 0, 255, 0.28), transparent 60%),
-      radial-gradient(circle at 100% 100%, rgba(217, 4, 41, 0.2), transparent 50%),
-      radial-gradient(circle at 0% 80%, rgba(139, 0, 255, 0.15), transparent 50%);
-    pointer-events: none;
-    z-index: 1;
+    position: fixed; inset: 0; z-index: 0; pointer-events: none;
+    background: linear-gradient(180deg, rgba(13,1,46,0.55) 0%, rgba(13,1,46,0.8) 60%, rgba(13,1,46,0.95) 100%);
+  }
+
+  #bg-canvas {
+    position: fixed; inset: 0; pointer-events: none; z-index: 0;
+  }
+
+  .noise-overlay {
+    position: fixed; inset: 0; opacity: 0.18; pointer-events: none; z-index: 1;
+    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
   }
 
   main { position: relative; z-index: 2; max-width: 480px; margin: 0 auto; padding: 24px 16px 64px; }
 
-  /* Hero Elements */
+  /* Título principal: cromo líquido con goteo */
+  .chrome-melt {
+    font-family: 'Rubik Wet Paint', 'Montserrat', sans-serif;
+    font-weight: 400;
+    text-transform: lowercase;
+    line-height: 0.95;
+    font-size: clamp(64px, 18vw, 92px);
+    letter-spacing: 1px;
+    background: linear-gradient(180deg,
+      #f5e1ff 0%,
+      #d15cff 22%,
+      #8F01B8 48%,
+      #2D0160 54%,
+      #a014e0 66%,
+      #e7a6ff 84%,
+      #C90AE4 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    filter: drop-shadow(0 0 10px rgba(201,10,228,0.9)) drop-shadow(0 0 26px rgba(143,1,184,0.6));
+  }
+
+  /* Títulos de sección: mismo estilo, más chicos */
+  .section-title-liquid {
+    text-align: center;
+    font-family: 'Rubik Wet Paint', 'Montserrat', sans-serif;
+    font-weight: 400;
+    text-transform: lowercase;
+    font-size: 34px;
+    letter-spacing: 1px;
+    color: transparent;
+    background: linear-gradient(180deg, #f5e1ff 0%, #C90AE4 50%, #8F01B8 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    margin: 48px 0 18px;
+    filter: drop-shadow(0 0 8px rgba(201,10,228,0.7));
+  }
+
+  /* Solo textura hexagonal, sin pisar el color de las tarjetas */
+  .hex-pattern {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='49' viewBox='0 0 28 49'%3E%3Cg fill-rule='evenodd'%3E%3Cg id='hexagons' fill='%238f01b8' fill-opacity='0.2' fill-rule='nonzero'%3E%3Cpath d='M13.99 9.25l13 7.5v15l-13 7.5L.99 31.75v-15l13-7.5zM0 0h28v4.75L14 12.8 0 4.75V0zm0 49h28v-4.75L14 36.2 0 44.25V49z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+
+  .glass-card {
+    background-color: var(--glass-bg);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 12px 40px rgba(13, 1, 46, 0.85), inset 0 1px 1px rgba(201, 10, 228, 0.4);
+    border-radius: 20px;
+  }
+
+  .glass-card-matte {
+    background: var(--matte-dark);
+    backdrop-filter: blur(24px);
+    border: 1px solid rgba(143, 1, 184, 0.45);
+    box-shadow: inset 0 0 25px rgba(45, 1, 96, 0.8), 0 8px 32px rgba(0,0,0,0.95);
+    border-radius: 20px;
+  }
+
   .tag {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
+    display: inline-flex; align-items: center; gap: 6px;
     font-size: 10px; letter-spacing: 4px; text-transform: uppercase;
-    color: var(--blood-red);
+    color: var(--fungal-hallucination);
     border: 1px solid var(--border-glow);
     padding: 6px 16px; border-radius: 999px;
     margin-bottom: 18px;
-    background: rgba(217, 4, 41, 0.08);
-    box-shadow: 0 0 15px rgba(217, 4, 41, 0.2);
+    background: rgba(143, 1, 184, 0.2);
+    box-shadow: 0 0 20px rgba(201, 10, 228, 0.4);
   }
 
-  .hero h1 {
-    font-size: clamp(38px, 11vw, 54px);
-    font-weight: 900; line-height: 0.98;
-    letter-spacing: -1.5px;
-    text-transform: uppercase;
+  .floating-emoji {
+    position: absolute; z-index: 10; font-size: 24px;
+    filter: drop-shadow(0 0 12px var(--fungal-hallucination));
+    animation: floatEmoji 2.5s ease-in-out infinite alternate;
+    pointer-events: none;
   }
-  .hero h1 span.purple { color: var(--neon-purple); text-shadow: 0 0 25px rgba(139,0,255,0.6); }
-  .hero h1 span.blood { color: var(--blood-red); text-shadow: 0 0 25px rgba(217,4,41,0.6); }
-
-  .hero p {
-    margin-top: 14px;
-    font-size: 14px; line-height: 1.5;
-    color: var(--text-muted);
-    font-weight: 600;
+  @keyframes floatEmoji {
+    0% { transform: translateY(0px) scale(1) rotate(-6deg); }
+    100% { transform: translateY(-10px) scale(1.15) rotate(8deg); }
   }
 
   .hero-banner-wrap {
-    position: relative;
-    border-radius: 20px;
-    overflow: hidden;
-    margin-top: 22px;
-    border: 1px solid var(--border-glow);
-    box-shadow: 0 12px 35px rgba(0,0,0,0.85), 0 0 20px rgba(139,0,255,0.25);
+    position: relative; border-radius: 20px; overflow: hidden; margin-top: 22px;
+    border: 1px solid var(--border-glow-bright);
+    box-shadow: 0 15px 40px rgba(13,1,46,0.95), 0 0 35px rgba(201,10,228,0.45);
+  }
+  .hero-banner-wrap img { width: 100%; aspect-ratio: 4/5; object-fit: cover; display: block; filter: brightness(0.88) contrast(1.15); }
+
+  .censor-badge {
+    position: absolute; left: 50%; bottom: 16px; transform: translateX(-50%);
+    z-index: 11; white-space: nowrap; font-size: 10px; font-weight: 900;
+    letter-spacing: 3px; text-transform: uppercase; color: #fff;
+    padding: 7px 16px; border-radius: 999px;
+    background: linear-gradient(90deg, var(--violet-poison), var(--fungal-hallucination));
+    box-shadow: 0 0 18px rgba(201,10,228,0.8);
+    border: 1px solid rgba(248,245,255,0.25);
   }
 
-  .hero-banner-wrap img {
-    width: 100%;
-    aspect-ratio: 4 / 5;
-    object-fit: cover;
-    display: block;
-    filter: brightness(0.92) contrast(1.08);
-  }
-
-  .section-title {
-    text-align: center;
-    font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
-    color: var(--blood-red);
-    margin: 48px 0 18px;
-    font-weight: 900;
-    display: flex; align-items: center; justify-content: center; gap: 12px;
-  }
-  .section-title::before, .section-title::after {
-    content: ""; height: 1px; width: 28px;
-    background: linear-gradient(90deg, transparent, var(--border-glow));
-  }
-  .section-title::after { background: linear-gradient(270deg, transparent, var(--border-glow)); }
-
-  /* Gallery Grid */
-  .gallery {
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
-  }
+  .gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; position: relative; }
   .gallery-item {
-    position: relative;
-    aspect-ratio: 3 / 4;
-    border-radius: 12px;
-    background: var(--latex-sheen);
-    border: 1px solid var(--border-glow);
-    overflow: hidden;
-    cursor: pointer;
-    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    position: relative; aspect-ratio: 3/4; border-radius: 14px; background: var(--deep-violet);
+    border: 1px solid var(--border-glow); overflow: hidden; cursor: pointer;
+    transition: all 0.25s ease;
   }
-  .gallery-item:hover {
-    transform: translateY(-3px);
-    border-color: var(--neon-purple);
-    box-shadow: 0 8px 20px rgba(139, 0, 255, 0.4);
-  }
-  .gallery-item img {
-    width: 100%; height: 100%; object-fit: cover; display: block; filter: brightness(0.9);
-  }
+  .gallery-item:hover { transform: translateY(-4px); border-color: var(--fungal-hallucination); box-shadow: 0 8px 25px rgba(201, 10, 228, 0.6); }
+  .gallery-item img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.85); }
   .gallery-overlay {
-    position: absolute; inset: 0;
-    background: linear-gradient(0deg, rgba(7,9,13,0.85) 0%, transparent 60%);
-    display: flex; align-items: flex-end; justify-content: center;
-    padding: 8px;
+    position: absolute; inset: 0; background: linear-gradient(0deg, rgba(13,1,46,0.95) 0%, transparent 65%);
+    display: flex; align-items: flex-end; justify-content: center; padding: 8px;
   }
 
-  /* Currency Switcher */
-  .currency-switch {
-    display: flex; justify-content: center; gap: 6px;
-    margin: 20px 0 24px;
-  }
+  .currency-switch { display: flex; justify-content: center; gap: 8px; margin: 20px 0 24px; }
   .currency-btn {
-    background: rgba(20, 24, 33, 0.6);
-    border: 1px solid var(--border-glow);
-    color: var(--text-muted);
-    font-size: 11px; font-weight: 800; letter-spacing: 1px;
-    padding: 6px 14px; border-radius: 999px;
-    cursor: pointer; transition: all 0.2s ease;
+    background: rgba(45, 1, 96, 0.5); border: 1px solid var(--border-glow); color: var(--text-muted);
+    font-size: 11px; font-weight: 800; letter-spacing: 1px; padding: 7px 16px; border-radius: 999px;
+    cursor: pointer; transition: all 0.25s ease;
   }
   .currency-btn.active {
-    background: var(--blood-red);
-    color: #fff;
-    border-color: var(--blood-red);
-    box-shadow: 0 0 12px rgba(217, 4, 41, 0.5);
+    background: linear-gradient(135deg, var(--violet-poison), var(--fungal-hallucination));
+    color: #fff; border-color: var(--fungal-hallucination); box-shadow: 0 0 20px rgba(201, 10, 228, 0.75);
   }
 
-  /* Offers Section */
   .offers { display: grid; gap: 16px; }
-  .offer {
-    background: rgba(20, 24, 33, 0.75);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid var(--border-glow);
-    border-radius: 20px;
-    padding: 24px 20px;
-    position: relative;
-    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
-  }
-  .offer:hover {
-    border-color: rgba(139, 0, 255, 0.5);
-    box-shadow: 0 8px 28px rgba(139, 0, 255, 0.25);
-  }
+  .offer { padding: 24px 20px; position: relative; transition: all 0.25s ease; }
+  .offer:hover { border-color: var(--fungal-hallucination); box-shadow: 0 10px 35px rgba(201, 10, 228, 0.45); }
   .offer.featured {
-    background: linear-gradient(160deg, rgba(139,0,255,0.22), rgba(20,24,33,0.9));
-    border: 1.5px solid var(--neon-purple);
-    box-shadow: 0 0 30px rgba(139,0,255,0.35);
+    background: linear-gradient(160deg, rgba(88,1,139,0.6), rgba(13,1,46,0.92));
+    border: 1.5px solid var(--fungal-hallucination); box-shadow: 0 0 40px rgba(201,10,228,0.5);
   }
   .badge {
     position: absolute; top: -11px; right: 18px;
-    background: var(--blood-red); color: #fff;
+    background: linear-gradient(90deg, var(--violet-poison), var(--fungal-hallucination)); color: #fff;
     font-size: 9px; font-weight: 900; letter-spacing: 2px; text-transform: uppercase;
-    padding: 4px 12px; border-radius: 999px;
-    box-shadow: 0 0 12px rgba(217,4,41,0.6);
+    padding: 4px 12px; border-radius: 999px; box-shadow: 0 0 15px rgba(201,10,228,0.8);
   }
-  .offer h3 { font-size: 20px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; }
+  .offer h3 { font-size: 20px; font-weight: 900; text-transform: uppercase; }
   .offer .sub { font-size: 13px; color: var(--text-muted); margin-top: 5px; line-height: 1.45; font-weight: 500; }
-  .price {
-    font-size: 38px; font-weight: 900; color: #fff; margin: 16px 0 4px;
-    letter-spacing: -1.5px; display: flex; align-items: baseline; gap: 6px;
-  }
-  .price small { font-size: 13px; font-weight: 700; color: var(--neon-purple); letter-spacing: 0; }
+  .price { font-size: 38px; font-weight: 900; color: #fff; margin: 16px 0 4px; letter-spacing: -1.5px; display: flex; align-items: baseline; gap: 6px; }
+  .price small { font-size: 13px; font-weight: 700; color: var(--fungal-hallucination); }
   .offer ul { list-style: none; margin: 16px 0 22px; display: grid; gap: 9px; }
-  .offer li {
-    font-size: 13px; line-height: 1.4; color: var(--text-main); font-weight: 600;
-    padding-left: 20px; position: relative;
-  }
-  .offer li::before {
-    content: "🩸"; position: absolute; left: 0; top: 0px; font-size: 11px;
-  }
+  .offer li { font-size: 13px; line-height: 1.4; color: var(--text-main); font-weight: 600; padding-left: 20px; position: relative; }
+  .offer li::before { content: "🖤"; position: absolute; left: 0; top: 0px; font-size: 11px; }
 
-  /* Buttons */
   .btn {
-    display: flex; align-items: center; justify-content: center; text-align: center;
-    text-decoration: none;
-    font-family: inherit; font-weight: 900; font-size: 13px;
-    letter-spacing: 2px; text-transform: uppercase;
-    padding: 16px; border-radius: 14px;
-    background: var(--blood-red); color: #fff;
-    box-shadow: 0 4px 20px rgba(217,4,41,0.4);
-    transition: transform .25s ease, filter .25s ease, box-shadow .25s ease;
-    cursor: pointer; border: none;
+    display: flex; align-items: center; justify-content: center; text-align: center; text-decoration: none;
+    font-family: inherit; font-weight: 900; font-size: 13px; letter-spacing: 2px; text-transform: uppercase;
+    padding: 16px; border-radius: 14px; background: linear-gradient(135deg, var(--violet-poison), var(--sql-purple)); color: #fff;
+    box-shadow: 0 4px 20px rgba(143,1,184,0.45); transition: all .25s ease; cursor: pointer; border: none;
   }
-  .btn:hover { filter: brightness(1.15); transform: translateY(-2px); box-shadow: 0 8px 25px rgba(217,4,41,0.6); }
-  .btn-purple {
-    background: linear-gradient(135deg, var(--neon-purple), #5B00B2);
-    box-shadow: 0 4px 20px rgba(139,0,255,0.4);
-  }
-  .btn-purple:hover { box-shadow: 0 8px 30px rgba(139,0,255,0.7); }
-  .btn.ghost {
-    background: rgba(255,255,255,0.04); color: var(--text-main);
-    border: 1px solid rgba(245,245,247,0.2);
-    box-shadow: none;
-  }
-  .btn.ghost:hover { background: rgba(255,255,255,0.08); border-color: var(--neon-purple); }
-  .pay-note {
-    display: block; text-align: center; margin-top: 10px;
-    font-size: 10px; color: var(--text-muted); letter-spacing: .5px; text-transform: uppercase; font-weight: 700;
-  }
+  .btn:hover { filter: brightness(1.2); transform: translateY(-2px); box-shadow: 0 8px 25px rgba(201,10,228,0.7); }
+  .btn-purple { background: linear-gradient(135deg, var(--fungal-hallucination), var(--violet-poison)); box-shadow: 0 4px 22px rgba(201,10,228,0.55); }
+  .btn.ghost { background: rgba(255,255,255,0.04); color: var(--text-main); border: 1px solid rgba(248,245,255,0.25); box-shadow: none; }
+  .btn.ghost:hover { background: rgba(201,10,228,0.15); border-color: var(--fungal-hallucination); }
+  .pay-note { display: block; text-align: center; margin-top: 10px; font-size: 10px; color: var(--text-muted); letter-spacing: .5px; text-transform: uppercase; font-weight: 700; }
 
-  /* Steps */
   .steps { display: grid; gap: 10px; }
-  .step {
-    display: flex; gap: 14px; align-items: center;
-    padding: 16px 18px; border-radius: 16px;
-    background: rgba(20, 24, 33, 0.55); border: 1px solid var(--border-glow);
-  }
-  .step b { font-size: 18px; color: var(--blood-red); min-width: 26px; font-weight: 900; }
+  .step { display: flex; gap: 14px; align-items: center; padding: 16px 18px; border-radius: 16px; background: rgba(45, 1, 96, 0.45); border: 1px solid var(--border-glow); }
+  .step b { font-size: 18px; color: var(--fungal-hallucination); min-width: 26px; font-weight: 900; }
   .step p { font-size: 13px; line-height: 1.4; color: var(--text-main); font-weight: 600; }
 
-  /* Accordion FAQ */
-  details {
-    background: rgba(20, 24, 33, 0.55);
-    border-radius: 14px;
-    border: 1px solid var(--border-glow);
-    margin-bottom: 10px;
-    padding: 15px 18px;
-    transition: border-color 0.2s ease;
-  }
-  details[open] { border-color: var(--neon-purple); }
-  summary {
-    cursor: pointer; font-weight: 700; font-size: 14px; color: var(--text-main);
-    list-style: none; display: flex; justify-content: space-between; align-items: center;
-  }
+  details { background: rgba(45, 1, 96, 0.4); border-radius: 14px; border: 1px solid var(--border-glow); margin-bottom: 10px; padding: 15px 18px; }
+  details[open] { border-color: var(--fungal-hallucination); background: rgba(88, 1, 139, 0.5); }
+  summary { cursor: pointer; font-weight: 700; font-size: 14px; color: var(--text-main); list-style: none; display: flex; justify-content: space-between; align-items: center; }
   summary::-webkit-details-marker { display: none; }
-  summary::after { content: "+"; color: var(--blood-red); font-size: 18px; font-weight: 900; }
-  details[open] summary::after { content: "−"; color: var(--neon-purple); }
+  summary::after { content: "+"; color: var(--fungal-hallucination); font-size: 18px; font-weight: 900; }
+  details[open] summary::after { content: "−"; color: var(--violet-poison); }
   details p { margin-top: 10px; font-size: 13px; line-height: 1.5; color: var(--text-muted); font-weight: 500; }
 
-  /* Modal Preview */
-  .modal-backdrop {
-    position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(8px);
-    z-index: 100; display: flex; align-items: center; justify-content: center; padding: 20px;
-    opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
-  }
-  .modal-backdrop.open { opacity: 1; pointer-events: auto; }
-  .modal-content {
-    position: relative; max-width: 380px; width: 100%; background: #0F121A;
-    border: 1px solid var(--border-glow); border-radius: 20px; overflow: hidden;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.9);
-  }
-  .modal-close {
-    position: absolute; top: 12px; right: 12px; z-index: 10;
-    width: 32px; height: 32px; border-radius: 50%; background: rgba(0,0,0,0.6);
-    color: #fff; display: flex; align-items: center; justify-content: center;
-    font-size: 18px; font-weight: 900; cursor: pointer; border: 1px solid rgba(255,255,255,0.2);
+  .ig-feed-widget { background: rgba(13, 1, 46, 0.9); border: 1px solid var(--border-glow-bright); border-radius: 20px; padding: 18px; margin-top: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.85); }
+  .ig-post-card { background: rgba(45, 1, 96, 0.4); border: 1px solid var(--border-glow); border-radius: 14px; padding: 14px; margin-top: 12px; }
+  .ig-avatar {
+    width: 34px; height: 34px; border-radius: 50%; flex-shrink: 0;
+    border: 1.5px solid var(--fungal-hallucination);
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 900; font-size: 15px; color: #fff;
+    background: linear-gradient(135deg, var(--violet-poison), var(--sql-purple));
+    box-shadow: 0 0 12px rgba(201,10,228,0.6);
   }
 
-  footer {
-    text-align: center; margin-top: 52px;
-    font-size: 11px; color: var(--text-muted); letter-spacing: 1px;
-  }
-  footer .mark { font-size: 22px; margin-bottom: 6px; color: var(--blood-red); text-shadow: 0 0 10px var(--blood-red); }
-  .disclaimer { margin-top: 10px; font-size: 10px; line-height: 1.4; opacity: .5; text-transform: uppercase; }
+  .modal-backdrop { position: fixed; inset: 0; background: rgba(13,1,46,0.92); backdrop-filter: blur(16px); z-index: 100; display: flex; align-items: center; justify-content: center; padding: 20px; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
+  .modal-backdrop.open { opacity: 1; pointer-events: auto; }
+  .modal-content { position: relative; max-width: 380px; width: 100%; background: var(--black-htun); border: 1px solid var(--border-glow-bright); border-radius: 20px; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.95), 0 0 35px rgba(201,10,228,0.4); }
+  .modal-close { position: absolute; top: 12px; right: 12px; z-index: 10; width: 32px; height: 32px; border-radius: 50%; background: rgba(13,1,46,0.8); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 900; cursor: pointer; border: 1px solid var(--border-glow); }
+
+  footer { text-align: center; margin-top: 52px; font-size: 11px; color: var(--text-muted); letter-spacing: 1px; }
+  footer .mark { font-size: 22px; margin-bottom: 6px; color: var(--fungal-hallucination); text-shadow: 0 0 10px var(--fungal-hallucination); }
+  .disclaimer { margin-top: 10px; font-size: 10px; line-height: 1.4; opacity: .55; text-transform: uppercase; }
 </style>
 </head>
 <body>
 
+<div class="noise-overlay"></div>
 <canvas id="bg-canvas"></canvas>
 
 <main>
 
   <section class="hero text-center">
-    <span class="tag">⛓️ · Explicito & Exclusivo 🩸</span>
-    <h1>Void<br><span class="blood">Fem</span></h1>
-    <p>Látex negro, tinta hexagonal y cero vueltas. Elegí cómo querés entrar a mi privado.</p>
-    
-    <div class="hero-banner-wrap">
-      <img src="banner.jpg" alt="@void" onerror="this.src='https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=800&q=80'">
+    <span class="tag">⛓️ · Colección Privada 🖤</span>
+    <h1 class="chrome-melt">void<br>fem</h1>
+    <p class="mt-3 text-sm text-[var(--text-muted)]">Máscara de látex negra, blackout geométrico y postura pesada. Mirás de cerca o te quedás afuera, bb.</p>
+
+    <div class="hero-banner-wrap hex-pattern">
+      <div class="floating-emoji" style="top: 12px; left: 12px;">🔥</div>
+      <div class="floating-emoji" style="bottom: 16px; right: 14px; animation-delay: -1.2s;">💦</div>
+      <div class="floating-emoji" style="top: 40%; right: -8px; animation-delay: -0.7s;">🥵</div>
+
+      <img src="banner.jpg" alt="@void">
+      <div class="censor-badge">ACCESO EXCLUSIVO</div>
     </div>
   </section>
 
-  <!-- Stock Urgency Bar -->
-  <div class="mt-6 p-3 rounded-xl bg-red-950/40 border border-red-500/30 flex items-center justify-between text-xs">
-    <span class="flex items-center gap-2 text-red-400 font-bold">
-      <span class="w-2 h-2 rounded-full bg-red-500 animate-ping"></span>
-      CUPOS VACANTES LIMITADOS
+  <div class="mt-6 p-3.5 rounded-xl glass-card-matte flex items-center justify-between text-xs">
+    <span class="flex items-center gap-2 text-[var(--fungal-hallucination)] font-bold">
+      <span class="w-2 h-2 rounded-full bg-[var(--fungal-hallucination)] animate-ping"></span>
+      ENTREGA INMEDIATA AL MAIL
     </span>
-    <span class="font-extrabold text-white bg-red-600/40 px-2 py-0.5 rounded border border-red-500/40" id="slots-count">3 libres</span>
+    <span class="font-extrabold text-white bg-[var(--violet-poison)]/40 px-2.5 py-1 rounded-md border border-[var(--border-glow-bright)]" id="slots-count">2 cupos libres</span>
   </div>
 
-  <h2 class="section-title">Vistazo de la colección</h2>
+  <h2 class="section-title-liquid">vistazo teaser</h2>
   <section class="gallery">
+    <div class="floating-emoji" style="top: -16px; right: 8px;">🔥</div>
+    <div class="floating-emoji" style="bottom: -12px; left: -8px; animation-delay: -1.5s;">💦</div>
+    <div class="floating-emoji" style="top: 35%; left: 30%; animation-delay: -0.5s;">🥵</div>
+
     <div class="gallery-item" onclick="openPreview('foto1.jpg', '#01 FLASH')">
-      <img src="foto1.jpg" alt="Preview 1" onerror="this.src='https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=400&q=80'">
-      <div class="gallery-overlay"><span class="text-[9px] font-black tracking-widest text-white uppercase">🔍 VER TEASER</span></div>
+      <img src="foto1.jpg" alt="Preview 1">
+      <div class="gallery-overlay"><span class="text-[9px] font-black tracking-widest text-white uppercase">👁️ VER MÁS</span></div>
     </div>
-    <div class="gallery-item" onclick="openPreview('foto2.jpg', '#02 LATEX')">
-      <img src="foto2.jpg" alt="Preview 2" onerror="this.src='https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=400&q=80'">
-      <div class="gallery-overlay"><span class="text-[9px] font-black tracking-widest text-white uppercase">🔍 VER TEASER</span></div>
+    <div class="gallery-item" onclick="openPreview('foto2.jpg', '#02 BLACKOUT')">
+      <img src="foto2.jpg" alt="Preview 2">
+      <div class="gallery-overlay"><span class="text-[9px] font-black tracking-widest text-white uppercase">👁️ VER MÁS</span></div>
     </div>
     <div class="gallery-item" onclick="openPreview('foto3.jpg', '#03 INTIMATE')">
-      <img src="foto3.jpg" alt="Preview 3" onerror="this.src='https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&w=400&q=80'">
-      <div class="gallery-overlay"><span class="text-[9px] font-black tracking-widest text-white uppercase">🔍 VER TEASER</span></div>
+      <img src="foto3.jpg" alt="Preview 3">
+      <div class="gallery-overlay"><span class="text-[9px] font-black tracking-widest text-white uppercase">👁️ VER MÁS</span></div>
     </div>
   </section>
 
-  <h2 class="section-title">Menú de Accesos</h2>
+  <h2 class="section-title-liquid">elegí tu dosis</h2>
 
-  <!-- Selector de moneda -->
   <div class="currency-switch">
     <button class="currency-btn active" id="btn-ars" onclick="setCurrency('ARS')">ARS ($)</button>
     <button class="currency-btn" id="btn-usd" onclick="setCurrency('USD')">USD ($)</button>
@@ -342,43 +309,63 @@
 
   <section class="offers">
 
-    <article class="offer">
-      <h3>Foto Random</h3>
+    <article class="offer glass-card hex-pattern">
+      <h3>Foto Random 🩸</h3>
       <p class="sub">Una imagen sorpresa para probar si te da el cuero.</p>
       <div class="price" id="price-1">$2.000 <small id="curr-1">ARS</small></div>
       <ul>
-        <li>1 foto en alta resolución</li>
-        <li>Entrega inmediata por email</li>
-        <li>Formato vertical sin censura</li>
+        <li>1 foto digital HD en alta resolución</li>
+        <li>Entrega inmediata a tu correo</li>
+        <li>Sin censura y directo al hueso</li>
       </ul>
-      <a class="btn ghost" href="https://mpago.la/2E2SJbt" target="_blank" rel="noopener">Comprar al toque</a>
-      <span class="pay-note">Mercado Pago / Pago Seguro 💳</span>
+      <a class="btn ghost" href="https://mpago.la/2E2SJbt" target="_blank" rel="noopener">PROBAR AL TOQUE 🔥</a>
+      <span class="pay-note">Mercado Pago / Seguro 💳</span>
     </article>
 
-    <article class="offer featured">
-      <span class="badge">MÁS PEDIDO 🩸</span>
-      <h3>Pack de 10 Fotos</h3>
-      <p class="sub">Diez imágenes directas al hueso. Látex negro, tinta y mirada pesada.</p>
+    <article class="offer glass-card featured hex-pattern">
+      <span class="badge">MÁS DESEADO 🖤</span>
+      <h3>Pack de 10 Fotos VIP 🔥</h3>
+      <p class="sub">Diez imágenes exclusivas sin escalas. Te sale la mitad.</p>
       <div class="price" id="price-2">$10.000 <small id="curr-2">ARS</small></div>
       <ul>
         <li>10 fotos HD exclusivas sin repetir</li>
-        <li>Poses de espalda y cuerpo completo</li>
-        <li>Entrega directa a tu casilla de correo</li>
+        <li>Látex, tinta y mirada pesada</li>
+        <li>Acceso instantáneo al mail</li>
       </ul>
-      <a class="btn btn-purple" href="https://mpago.la/1ELyceL" target="_blank" rel="noopener">Activar pack full 🔞</a>
-      <span class="pay-note">Mercado Pago / Pago Seguro 💳</span>
+      <a class="btn btn-purple" href="https://mpago.la/1ELyceL" target="_blank" rel="noopener">ACTIVAR PACK FULL 🔓</a>
+      <span class="pay-note">Mercado Pago / Seguro 💳</span>
     </article>
 
   </section>
 
-  <h2 class="section-title">Cómo se maneja</h2>
-  <section class="steps">
-    <div class="step"><b>01</b><p>Elegís tu opción y pagás al toque con Mercado Pago.</p></div>
-    <div class="step"><b>02</b><p>Te cae el contenido directo a tu correo electrónico.</p></div>
-    <div class="step"><b>03</b><p>Disfrutás en privado. No hay devoluciones.</p></div>
+  <h2 class="section-title-liquid">feed // @voidprompts.bat</h2>
+  <section class="ig-feed-widget">
+    <div class="ig-post-header flex items-center gap-3">
+      <div class="ig-avatar">V</div>
+      <div>
+        <h4 class="text-xs font-black text-white">@void 🖤</h4>
+        <p class="text-[10px] text-[var(--text-muted)]">@voidprompts.bat · Visual Archive & Aesthetics</p>
+      </div>
+      <a href="https://www.instagram.com/voidprompts.bat/" target="_blank" rel="noopener" class="ml-auto text-[10px] font-black text-[var(--fungal-hallucination)] uppercase border border-[var(--border-glow)] px-2.5 py-1 rounded-full">Seguir</a>
+    </div>
+
+    <div class="ig-post-card">
+      <div class="text-[11px] font-mono text-[var(--text-muted)] space-y-1.5">
+        <p class="text-[var(--fungal-hallucination)] font-bold">📂 void_feed_latest.png</p>
+        <p class="text-white font-semibold">no compro con fantasmas, yo juego en otra liga ⛓️🦇</p>
+        <p class="text-xs opacity-80">"el algoritmo me pertenece y tu atención también. link en bio, no cuelgues bb."</p>
+      </div>
+    </div>
   </section>
 
-  <h2 class="section-title">Dudas</h2>
+  <h2 class="section-title-liquid">cómo se maneja</h2>
+  <section class="steps">
+    <div class="step"><b>01</b><p>Elegís tu opción y pagás al toque.</p></div>
+    <div class="step"><b>02</b><p>Te cae el contenido directo al correo al instante.</p></div>
+    <div class="step"><b>03</b><p>Te callás y disfrutás. No hay devoluciones.</p></div>
+  </section>
+
+  <h2 class="section-title-liquid">dudas</h2>
   <section>
     <details>
       <summary>¿Qué incluye cada compra?</summary>
@@ -386,40 +373,39 @@
     </details>
     <details>
       <summary>¿Cuánto demora en llegar?</summary>
-      <p>Apenas se acredita el pago, te lo mando al mail usado en Mercado Pago. Cero vueltas.</p>
+      <p>Apenas entra el pago, te lo mando al mail. Si tardás en pagar, esperás.</p>
     </details>
     <details>
-      <summary>¿La máscara de látex se saca?</summary>
-      <p>La máscara de orejas rectas no se saca jamás. Es la marca de la casa. Todo lo demás queda expuesto.</p>
+      <summary>¿La máscara se saca?</summary>
+      <p>La máscara de látex negro con orejas rectas no se saca jamás. Es la firma de la casa.</p>
     </details>
     <details>
       <summary>¿Hay reembolsos?</summary>
-      <p>Ni lo pienses. Contenido digital entregado no tiene devolución.</p>
+      <p>Ni en pedo. Contenido digital consumido, no se devuelve.</p>
     </details>
   </section>
 
   <section style="margin-top:40px;text-align:center;">
-    <a class="btn ghost" href="https://www.instagram.com/greykuromi/" target="_blank" rel="noopener">HABLAR AL DM EN INSTAGRAM 💋</a>
+    <a class="btn ghost" href="https://www.instagram.com/voidprompts.bat/" target="_blank" rel="noopener">ESCRIBIME AL DM 💋</a>
   </section>
 
   <footer>
-    <div class="mark">🦇</div>
+    <div class="mark">🖤</div>
     <p>@void · High-Level Baddie</p>
     <p class="disclaimer">Contenido exclusivo para mayores de 18 años. Prohibida su redistribución.</p>
   </footer>
 
 </main>
 
-<!-- Modal Preview Teaser -->
 <div class="modal-backdrop" id="modal-preview" onclick="closePreview()">
   <div class="modal-content" onclick="event.stopPropagation()">
     <div class="modal-close" onclick="closePreview()">×</div>
     <div class="relative">
-      <img id="modal-img" src="" alt="Teaser Preview" class="w-full aspect-[3/4] object-cover filter blur-sm brightness-90">
-      <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent flex flex-col items-center justify-end p-6 text-center">
-        <span class="text-xs font-black tracking-widest text-[var(--blood-red)] uppercase mb-1" id="modal-tag">#TEASER</span>
+      <img id="modal-img" src="" alt="Teaser Preview" class="w-full aspect-[3/4] object-cover filter blur-md brightness-90">
+      <div class="absolute inset-0 bg-gradient-to-t from-[var(--black-htun)] via-[var(--black-htun)]/50 to-transparent flex flex-col items-center justify-end p-6 text-center">
+        <span class="text-xs font-black tracking-widest text-[var(--fungal-hallucination)] uppercase mb-1" id="modal-tag">#TEASER</span>
         <h4 class="text-lg font-extrabold text-white uppercase">Acceso Restringido</h4>
-        <p class="text-xs text-gray-300 mt-1 mb-4">Adquirí el pack para desbloquear la colección sin censura en HD.</p>
+        <p class="text-xs text-gray-300 mt-1 mb-4">Adquirí el pack para desbloquear la colección en HD.</p>
         <a class="btn btn-purple w-full text-xs py-3" href="https://mpago.la/1ELyceL" target="_blank" rel="noopener">DESBLOQUEAR AHORA 🔓</a>
       </div>
     </div>
@@ -427,7 +413,6 @@
 </div>
 
 <script>
-  // Particle Canvas Interactive Background
   const canvas = document.getElementById('bg-canvas');
   const ctx = canvas.getContext('2d');
   let width, height;
@@ -441,46 +426,35 @@
   resize();
 
   class Particle {
-    constructor() {
-      this.reset();
-    }
+    constructor() { this.reset(); }
     reset() {
-      this.x = Math.random() * width;
-      this.y = Math.random() * height;
-      this.size = Math.random() * 2 + 0.5;
-      this.speedY = -(Math.random() * 0.4 + 0.1);
-      this.speedX = (Math.random() - 0.5) * 0.2;
-      this.opacity = Math.random() * 0.5 + 0.2;
-      this.color = Math.random() > 0.4 ? '139, 0, 255' : '217, 4, 41';
+      this.x = Math.random() * width; this.y = Math.random() * height;
+      this.size = Math.random() * 2.5 + 0.5;
+      this.speedY = -(Math.random() * 0.35 + 0.1);
+      this.speedX = (Math.random() - 0.5) * 0.25;
+      this.opacity = Math.random() * 0.55 + 0.2;
+      const palette = ['143, 1, 184', '201, 10, 228', '88, 1, 139'];
+      this.color = palette[Math.floor(Math.random() * palette.length)];
     }
     update() {
-      this.y += this.speedY;
-      this.x += this.speedX;
+      this.y += this.speedY; this.x += this.speedX;
       if (this.y < 0) this.reset();
     }
     draw() {
       ctx.fillStyle = `rgba(${this.color}, ${this.opacity})`;
-      ctx.beginPath();
-      ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-      ctx.fill();
+      ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill();
     }
   }
 
-  for (let i = 0; i < 45; i++) {
-    particles.push(new Particle());
-  }
+  for (let i = 0; i < 45; i++) particles.push(new Particle());
 
   function animate() {
     ctx.clearRect(0, 0, width, height);
-    particles.forEach(p => {
-      p.update();
-      p.draw();
-    });
+    particles.forEach(p => { p.update(); p.draw(); });
     requestAnimationFrame(animate);
   }
   animate();
 
-  // Currency switch logic
   const prices = {
     ARS: { p1: '$2.000', p2: '$10.000', curr: 'ARS' },
     USD: { p1: '$5', p2: '$20', curr: 'USD' }
@@ -489,35 +463,27 @@
   function setCurrency(curr) {
     document.getElementById('btn-ars').classList.toggle('active', curr === 'ARS');
     document.getElementById('btn-usd').classList.toggle('active', curr === 'USD');
-    
     document.getElementById('price-1').childNodes[0].nodeValue = prices[curr].p1 + ' ';
     document.getElementById('curr-1').innerText = prices[curr].curr;
-
     document.getElementById('price-2').childNodes[0].nodeValue = prices[curr].p2 + ' ';
     document.getElementById('curr-2').innerText = prices[curr].curr;
   }
 
-  // Modal Preview Logic
   function openPreview(imgSrc, tagText) {
-    const modal = document.getElementById('modal-preview');
-    const modalImg = document.getElementById('modal-img');
-    const modalTag = document.getElementById('modal-tag');
-
-    modalImg.src = imgSrc;
-    modalTag.innerText = tagText;
-    modal.classList.add('open');
+    document.getElementById('modal-img').src = imgSrc;
+    document.getElementById('modal-tag').innerText = tagText;
+    document.getElementById('modal-preview').classList.add('open');
   }
 
   function closePreview() {
     document.getElementById('modal-preview').classList.remove('open');
   }
 
-  // Dynamic urgency slots
-  let slots = 3;
+  let slots = 2;
   setInterval(() => {
     if (Math.random() > 0.7 && slots > 1) {
       slots--;
-      document.getElementById('slots-count').innerText = slots + ' libres';
+      document.getElementById('slots-count').innerText = slots + ' cupos libres';
     }
   }, 12000);
 </script>
